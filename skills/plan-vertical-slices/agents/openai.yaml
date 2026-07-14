@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan Vertical Slices"
+  short_description: "Plan runnable, end-to-end delivery phases"
+  default_prompt: "Use $plan-vertical-slices to turn this build into runnable, verifiable end-to-end phases."
