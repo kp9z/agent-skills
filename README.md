@@ -1,6 +1,15 @@
 # Agent Skills
 
-Personal Codex skills that can be installed across multiple machines.
+Personal agent skills and setup instructions that can be reused across multiple
+machines.
+
+## Reusable setup instructions
+
+- [Install destructive-command hooks for Codex or Claude Code](instructions/install-destructive-command-hooks.md)
+
+Copy the text block from an instruction file into the relevant agent on a new
+machine. The agent will inspect existing configuration, perform the installation,
+and validate the result.
 
 ## Available skills
 
