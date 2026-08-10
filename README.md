@@ -6,12 +6,24 @@ machines.
 ## Reusable setup instructions
 
 - [Install destructive-command hooks for Codex or Claude Code](instructions/install-destructive-command-hooks.md)
+- [Install the grill-me engineering workflow in a new repository](instructions/install-grill-me-skills.md)
 
 Copy the text block from an instruction file into the relevant agent on a new
 machine. The agent will inspect existing configuration, perform the installation,
 and validate the result.
 
 ## Available skills
+
+### `skill-maintenance`
+
+Audits a skill collection for duplicate names, weak or overlapping triggers,
+stale pointers, broken references, invalid metadata, and inconsistent vocabulary.
+
+Invoke it explicitly with:
+
+```text
+Use $skill-maintenance to audit this skill collection.
+```
 
 ### `plan-vertical-slices`
 
@@ -49,11 +61,13 @@ Create the personal skills directory:
 mkdir -p "$HOME/.agents/skills"
 ```
 
-Symlink the skill so repository updates become available automatically:
+Symlink the skills so repository updates become available automatically:
 
 ```bash
 ln -s "$HOME/agent-skills/skills/plan-vertical-slices" \
   "$HOME/.agents/skills/plan-vertical-slices"
+ln -s "$HOME/agent-skills/skills/skill-maintenance" \
+  "$HOME/.agents/skills/skill-maintenance"
 ```
 
 If that destination already exists, rename or remove the existing copy before

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill Maintenance"
+  short_description: "Audit and repair an agent skill collection"
+  default_prompt: "Use $skill-maintenance to audit this skill collection and fix its maintenance problems."
