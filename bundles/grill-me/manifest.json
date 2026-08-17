@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "name": "grill-me",
+  "type": "skill-bundle",
+  "upstream": {
+    "repository": "https://github.com/mattpocock/skills.git",
+    "releaseTagPattern": "v*"
+  },
+  "bundled": {
+    "version": "1.2.3",
+    "tag": "v1.2.3",
+    "commit": "6acc160e4e0cd062dbbbd7a1b26ae92855edf07e",
+    "license": "MIT",
+    "licenseSha256": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5"
+  },
+  "skills": [
+    {
+      "name": "setup-matt-pocock-skills",
+      "path": "skills/setup-matt-pocock-skills",
+      "upstreamPath": "skills/engineering/setup-matt-pocock-skills"
+    },
+    {
+      "name": "triage",
+      "path": "skills/triage",
+      "upstreamPath": "skills/engineering/triage"
+    },
+    {
+      "name": "grill-me",
+      "path": "skills/grill-me",
+      "upstreamPath": "skills/productivity/grill-me"
+    },
+    {
+      "name": "grilling",
+      "path": "skills/grilling",
+      "upstreamPath": "skills/productivity/grilling"
+    },
+    {
+      "name": "improve-codebase-architecture",
+      "path": "skills/improve-codebase-architecture",
+      "upstreamPath": "skills/engineering/improve-codebase-architecture"
+    },
+    {
+      "name": "codebase-design",
+      "path": "skills/codebase-design",
+      "upstreamPath": "skills/engineering/codebase-design"
+    },
+    {
+      "name": "domain-modeling",
+      "path": "skills/domain-modeling",
+      "upstreamPath": "skills/engineering/domain-modeling"
+    },
+    {
+      "name": "writing-for-agents",
+      "path": "skills/writing-for-agents",
+      "upstreamPath": "skills/productivity/writing-for-agents"
+    },
+    {
+      "name": "to-spec",
+      "path": "skills/to-spec",
+      "upstreamPath": "skills/engineering/to-spec"
+    },
+    {
+      "name": "to-tickets",
+      "path": "skills/to-tickets",
+      "upstreamPath": "skills/engineering/to-tickets"
+    },
+    {
+      "name": "tdd",
+      "path": "skills/tdd",
+      "upstreamPath": "skills/engineering/tdd"
+    },
+    {
+      "name": "implement",
+      "path": "skills/implement",
+      "upstreamPath": "skills/engineering/implement"
+    },
+    {
+      "name": "code-review",
+      "path": "skills/code-review",
+      "upstreamPath": "skills/engineering/code-review"
+    }
+  ]
+}

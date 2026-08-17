@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "name": "kp9z-skills",
+  "type": "skill-bundle",
+  "version": "1.0.0",
+  "skills": [
+    {
+      "name": "plan-vertical-slices",
+      "path": "skills/plan-vertical-slices"
+    },
+    {
+      "name": "skill-maintenance",
+      "path": "skills/skill-maintenance"
+    }
+  ]
+}

@@ -1,91 +1,96 @@
-# Agent Skills
+# Agent Skills and Bundles
 
-Personal agent skills and setup instructions that can be reused across multiple
-machines.
+Reusable agent skills, engineering workflows, and lifecycle hooks. Everything
+installable lives in a self-contained bundle with its own payload, manifest,
+and agent-facing installation instruction.
 
-## Reusable setup instructions
+## Start here
 
-- [Install destructive-command hooks for Codex or Claude Code](instructions/install-destructive-command-hooks.md)
-- [Install the grill-me engineering workflow in a new repository](instructions/install-grill-me-skills.md)
+Choose the bundle that matches the job, then give its `INSTALL.md` to the agent
+performing the installation.
 
-Copy the text block from an instruction file into the relevant agent on a new
-machine. The agent will inspect existing configuration, perform the installation,
-and validate the result.
+| Bundle | Purpose | Install instruction |
+| --- | --- | --- |
+| `grill-me` | A pinned 13-skill engineering workflow based on Matt Pocock's skill suite | [`bundles/grill-me/INSTALL.md`](bundles/grill-me/INSTALL.md) |
+| `kp9z-skills` | The `plan-vertical-slices` and `skill-maintenance` skills | [`bundles/kp9z-skills/INSTALL.md`](bundles/kp9z-skills/INSTALL.md) |
+| `destructive-command-hooks` | A shared destructive-command blocker with Codex and Claude Code adapters | [`bundles/destructive-command-hooks/INSTALL.md`](bundles/destructive-command-hooks/INSTALL.md) |
 
-## Available skills
+## How bundles work
 
-### `skill-maintenance`
-
-Audits a skill collection for duplicate names, weak or overlapping triggers,
-stale pointers, broken references, invalid metadata, and inconsistent vocabulary.
-
-Invoke it explicitly with:
+Each bundle separates reusable source from the harness-specific destination:
 
 ```text
-Use $skill-maintenance to audit this skill collection.
+bundles/<bundle-name>/
+├── INSTALL.md       # instructions for the installing agent
+├── manifest.json    # identity, version, contents, and source metadata
+└── ...              # skills, hook code, adapters, tests, or licenses
 ```
 
-### `plan-vertical-slices`
+`INSTALL.md` is not copied into the target project. The installing agent reads
+the manifest, determines the active harness, inspects existing configuration,
+asks before replacing conflicts, and copies only the bundle payload to the
+appropriate destination.
 
-Plans and executes software builds as runnable, end-to-end vertical slices.
+## Bundle details
 
-Each phase must:
+### Grill-me
 
-- leave the application runnable;
-- provide one user-observable capability;
-- cross the necessary frontend, backend, and data layers;
-- include an end-to-end check;
-- include exact manual verification instructions;
-- reach a clear done gate before the next phase.
+The bundle contains exactly these 13 skills:
 
-Invoke it explicitly with:
+- `setup-matt-pocock-skills`
+- `triage`
+- `grill-me`
+- `grilling`
+- `improve-codebase-architecture`
+- `codebase-design`
+- `domain-modeling`
+- `writing-for-agents`
+- `to-spec`
+- `to-tickets`
+- `tdd`
+- `implement`
+- `code-review`
+
+The bundled snapshot is pinned to an upstream release. Before every new
+installation, the agent checks the upstream release tags. If a newer stable
+release exists, the agent asks whether to install that exact release or use the
+bundled snapshot.
+
+Project-specific files such as `AGENTS.md`, `CLAUDE.md`, and `docs/agents/*`
+are generated during setup. They are not stored as generic templates in this
+repository.
+
+### kp9z skills
+
+The two original skills are stored together without assuming a harness-specific
+installation directory. Each complete skill directory is copied as one unit.
+
+### Destructive-command hooks
+
+The hook bundle stores one shared Python implementation plus separate merge
+fragments for Codex and Claude Code. The installer merges the selected adapter
+into existing user configuration and never replaces unrelated hooks or settings.
+
+## Repository map
 
 ```text
-Use $plan-vertical-slices to plan and build this application.
+bundles/
+├── grill-me/
+│   ├── INSTALL.md
+│   ├── manifest.json
+│   ├── LICENSE
+│   └── skills/
+├── kp9z-skills/
+│   ├── INSTALL.md
+│   ├── manifest.json
+│   └── skills/
+└── destructive-command-hooks/
+    ├── INSTALL.md
+    ├── manifest.json
+    ├── shared/
+    ├── harnesses/
+    └── tests/
 ```
 
-Codex may also select it automatically for requests mentioning vertical slices,
-phasal planning, walking skeletons, end-to-end milestones, or verifiable phases.
-
-## Install on another machine
-
-Clone this repository:
-
-```bash
-git clone https://github.com/kp9z/agent-skills.git "$HOME/agent-skills"
-```
-
-Create the personal skills directory:
-
-```bash
-mkdir -p "$HOME/.agents/skills"
-```
-
-Symlink the skills so repository updates become available automatically:
-
-```bash
-ln -s "$HOME/agent-skills/skills/plan-vertical-slices" \
-  "$HOME/.agents/skills/plan-vertical-slices"
-ln -s "$HOME/agent-skills/skills/skill-maintenance" \
-  "$HOME/.agents/skills/skill-maintenance"
-```
-
-If that destination already exists, rename or remove the existing copy before
-creating the symlink.
-
-Restart Codex if the skill does not appear immediately.
-
-## Update installed skills
-
-Pull the latest repository changes:
-
-```bash
-git -C "$HOME/agent-skills" pull --ff-only
-```
-
-Because the installed skill is symlinked, no additional copying is required.
-
-## Repository structure
-
-Each skill is stored under `skills/<skill-name>/` and contains a required
-`SKILL.md`. A skill may also include UI metadata, scripts, references, or assets.
+Agents should start with this README, select one bundle, read that bundle's
+`manifest.json`, and then follow only its `INSTALL.md`.
