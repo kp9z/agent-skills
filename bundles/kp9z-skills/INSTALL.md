@@ -5,8 +5,11 @@ have access to a local checkout of `kp9z/agent-skills` containing this file.
 
 ## Install
 
-1. Determine the active agent harness and its project-local skill directory.
-   Use the harness's documented location. Ask the user if the destination is
+1. Determine the active agent harness and its skill directory. For Codex and
+   Claude Code, use the harness's documented project-local location. For
+   Hermes Agent, use `~/.hermes/skills/<skill-name>` because Hermes does not
+   discover a project's `.agents/skills` directory by default. For another
+   harness, use its documented location. Ask the user if the destination is
    uncertain.
 2. Read [`manifest.json`](manifest.json) and verify every listed skill path.
 3. Inspect each destination before copying. Leave identical skills unchanged.
