@@ -1,14 +1,18 @@
-# Install the grill-me engineering workflow
+# Install Core
 
 Use this instruction inside the target repository. The installing agent must
 have access to a local checkout of `kp9z/agent-skills` containing this file.
 
 ## Install
 
-1. Determine the active agent harness and its project-local skill directory.
-   Use the harness's documented location. If the harness supports more than one
-   location or the correct destination is uncertain, ask the user before
-   copying anything.
+1. Determine the active agent harness and its skill directory:
+   - For Codex and Claude Code, use the harness's documented project-local
+     skill directory.
+   - For Hermes Agent, use `~/.hermes/skills/<skill-name>`. Hermes does not
+     discover a project's `.agents/skills` directory by default.
+   - For another harness, use its documented location.
+   If the harness supports more than one location or the correct destination is
+   uncertain, ask the user before copying anything.
 2. Locate this bundle and read [`manifest.json`](manifest.json). Verify that
    every listed bundled skill directory exists and that the local snapshot
    contains exactly the 13 listed skills.
@@ -33,12 +37,16 @@ have access to a local checkout of `kp9z/agent-skills` containing this file.
    - If an existing skill differs, show the conflict and ask before replacing
      it.
    - Preserve unrelated skills.
-5. Copy each complete selected skill directory to the harness's project-local
-   skill directory. Do not also install this suite with skills.sh or the Claude
-   Code plugin.
+5. Copy each complete selected skill directory to the destination selected in
+   step 1. Do not also install this suite with skills.sh or the Claude Code
+   plugin.
 6. Configure only the active harness unless the user explicitly requests more:
    - For Codex, preserve or create `AGENTS.md`.
    - For Claude Code, preserve or create `CLAUDE.md`.
+   - For Hermes Agent, preserve or create `AGENTS.md` at the repository root
+     and run Hermes from that root. Hermes only checks the current directory
+     for `AGENTS.md`. After setup, verify the `## Agent skills` section is in
+     `AGENTS.md`, even when a pre-existing `CLAUDE.md` is also present.
    - For another harness, use its documented project instruction file. If it
      has no equivalent, ask the user how project instructions should be stored.
 7. Run `setup-matt-pocock-skills` for the target repository. Prefer its detected

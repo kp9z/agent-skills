@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "name": "grill-me",
+  "name": "core",
   "type": "skill-bundle",
   "upstream": {
     "repository": "https://github.com/mattpocock/skills.git",
