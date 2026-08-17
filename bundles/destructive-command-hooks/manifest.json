@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "name": "destructive-command-hooks",
+  "type": "hook-bundle",
+  "version": "1.0.0",
+  "sharedHook": "shared/destructive_commands.py",
+  "tests": "tests/test_destructive_commands.py",
+  "harnesses": {
+    "codex": {
+      "fragment": "harnesses/codex/hooks.fragment.json",
+      "config": "~/.codex/hooks.json",
+      "script": "~/.codex/hooks/destructive_commands.py",
+      "documentation": "https://learn.chatgpt.com/docs/hooks"
+    },
+    "claude-code": {
+      "fragment": "harnesses/claude-code/settings.fragment.json",
+      "config": "~/.claude/settings.json",
+      "script": "~/.claude/hooks/destructive_commands.py",
+      "documentation": "https://code.claude.com/docs/en/hooks"
+    }
+  }
+}
