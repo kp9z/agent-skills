@@ -23,6 +23,7 @@ Each bundle separates reusable source from the harness-specific destination:
 ```text
 bundles/<bundle-name>/
 ├── INSTALL.md       # instructions for the installing agent
+├── SETUP.md         # optional default setup profile
 ├── manifest.json    # identity, version, contents, and source metadata
 └── ...              # skills, included bundles, hooks, tests, or licenses
 ```
@@ -60,6 +61,10 @@ bundled snapshot.
 Project-specific files such as `AGENTS.md`, `CLAUDE.md`, and `docs/agents/*`
 are generated during setup. They are not stored as generic templates in this
 repository.
+
+[`bundles/core/SETUP.md`](bundles/core/SETUP.md) records the recommended
+repository defaults for an installing agent. It supplies answers to the setup
+workflow without changing the bundled setup skill itself.
 
 For Hermes Agent, skills install under `~/.hermes/skills` and portable project
 instructions belong in the repository-root `AGENTS.md`. Run Hermes from that
