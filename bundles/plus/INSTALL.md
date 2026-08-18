@@ -8,13 +8,14 @@ This composed bundle installs all 13 skills from `core`, then adds
 ## Install
 
 1. Determine the active agent harness and its skill directory:
-   - For Codex and Claude Code, use the harness's documented project-local
-     skill directory.
+   - For Codex, install to `$HOME/.agents/skills` by default so the suite is
+     available in every repository. Use `$REPO_ROOT/.agents/skills` only when
+     the user explicitly requests a repository-scoped installation.
+   - For Claude Code, use its documented skill directory.
    - For Hermes Agent, use `~/.hermes/skills/<skill-name>`. Hermes does not
      discover a project's `.agents/skills` directory by default.
    - For another harness, use its documented location.
-   If the harness supports more than one location or the correct destination is
-   uncertain, ask the user before copying anything.
+   Ask only when the active harness or destination cannot be detected.
 2. Read this bundle's [`manifest.json`](manifest.json) and its included
    `../core/manifest.json`. Verify that both snapshots use the same
    upstream tag and commit, all listed directories exist, and their combined
@@ -25,7 +26,7 @@ This composed bundle installs all 13 skills from `core`, then adds
      'refs/tags/v*'`.
    - Interpret release tags as semantic versions and compare the highest stable
      tag with `bundled.tag` in the manifests.
-   - If upstream is newer, ask exactly: "The bundled grill-me suite is <bundled
+   - If upstream is newer, ask exactly: "The bundled Plus suite is <bundled
      tag>, and upstream <latest tag> is available. Install the newer upstream
      release instead of the bundled release?"
    - Do not continue until the user answers.
@@ -51,10 +52,13 @@ This composed bundle installs all 13 skills from `core`, then adds
      `AGENTS.md`, even when a pre-existing `CLAUDE.md` is also present.
    - For another harness, use its documented project instruction file. If it
      has no equivalent, ask the user how project instructions should be stored.
-7. Run `setup-matt-pocock-skills` for the target repository. Prefer its detected
-   issue tracker, the default triage vocabulary, and the single-context domain
-   layout unless the repository has real monorepo signals. Let the setup skill
-   ask for any choice it requires.
+7. Read the selected, installed
+   `<skill-destination>/setup-matt-pocock-skills/SKILL.md` and execute it
+   immediately as part of this installation; do not wait for the user to invoke
+   the skill separately. Its default fast path configures a GitHub remote,
+   canonical triage labels, the active harness, and a single-context domain
+   layout without questions. Stop only when it reports ambiguity or conflicting
+   existing configuration.
 8. When GitHub is selected, ensure these labels exist without changing
    unrelated labels: `bug`, `enhancement`, `needs-triage`, `needs-info`,
    `ready-for-agent`, `ready-for-human`, `wontfix`, `wayfinder:map`,
@@ -67,6 +71,7 @@ This composed bundle installs all 13 skills from `core`, then adds
    - The selected instruction file contains one `## Agent skills` section.
    - Issue tracker and triage mappings agree with the target repository.
    - No duplicate copy of the suite is installed through another mechanism.
+   - A second setup run is a no-op and all required GitHub labels exist.
 
 At the end, report the bundled version, latest upstream version found, selected
 version, destination, installed or unchanged skills, replaced conflicts, files

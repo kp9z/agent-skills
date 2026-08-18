@@ -61,6 +61,11 @@ Project-specific files such as `AGENTS.md`, `CLAUDE.md`, and `docs/agents/*`
 are generated during setup. They are not stored as generic templates in this
 repository.
 
+Setup has a zero-prompt default path: Codex uses `AGENTS.md`, a GitHub remote
+uses GitHub Issues, triage uses the canonical labels, and ordinary repositories
+use the single-context domain layout. It asks only when detection is ambiguous
+or existing configuration conflicts, and reruns repair missing files or labels.
+
 For Hermes Agent, skills install under `~/.hermes/skills` and portable project
 instructions belong in the repository-root `AGENTS.md`. Run Hermes from that
 root so it loads the file. The destructive-command hook bundle currently has
