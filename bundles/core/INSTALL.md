@@ -49,10 +49,10 @@ have access to a local checkout of `kp9z/agent-skills` containing this file.
      `AGENTS.md`, even when a pre-existing `CLAUDE.md` is also present.
    - For another harness, use its documented project instruction file. If it
      has no equivalent, ask the user how project instructions should be stored.
-7. Run `setup-matt-pocock-skills` for the target repository. Prefer its detected
-   issue tracker, the default triage vocabulary, and the single-context domain
-   layout unless the repository has real monorepo signals. Let the setup skill
-   ask for any choice it requires.
+7. Read [`SETUP.md`](SETUP.md), then run `setup-matt-pocock-skills` for the
+   target repository. When the user requested the default setup, use that profile
+   as the already-decided answers while preserving the setup skill's workflow.
+   Let the setup skill ask about detected exceptions or conflicts.
 8. When GitHub is selected, ensure these labels exist without changing
    unrelated labels: `bug`, `enhancement`, `needs-triage`, `needs-info`,
    `ready-for-agent`, `ready-for-human`, and `wontfix`. Reuse matching labels
