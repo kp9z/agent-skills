@@ -12,7 +12,8 @@ performing the installation.
 | Bundle | Purpose | Install instruction |
 | --- | --- | --- |
 | `core` | The pinned 13-skill engineering workflow | [`bundles/core/INSTALL.md`](bundles/core/INSTALL.md) |
-| `plus` | Core plus Wayfinder, Research, Prototype, and Teach | [`bundles/plus/INSTALL.md`](bundles/plus/INSTALL.md) |
+| `plus` | Core plus Wayfinder, Research, and Prototype | [`bundles/plus/INSTALL.md`](bundles/plus/INSTALL.md) |
+| `grill-me-supplements` | Named, opt-in skills that complement `grill-me` | [`bundles/grill-me-supplements/INSTALL.md`](bundles/grill-me-supplements/INSTALL.md) |
 | `kp9z-skills` | The `plan-vertical-slices` and `skill-maintenance` skills | [`bundles/kp9z-skills/INSTALL.md`](bundles/kp9z-skills/INSTALL.md) |
 | `destructive-command-hooks` | A shared destructive-command blocker with Codex and Claude Code adapters | [`bundles/destructive-command-hooks/INSTALL.md`](bundles/destructive-command-hooks/INSTALL.md) |
 
@@ -73,16 +74,22 @@ adapters only for Codex and Claude Code.
 
 ### Plus
 
-Plus composes the entire Core bundle with four additional skills:
+Plus composes the entire Core bundle with three additional skills:
 
 - `wayfinder`
 - `research`
 - `prototype`
-- `teach`
 
 `wayfinder` maps a large, uncertain effort into decision tickets. Its
 `research` and `prototype` dependencies are included so every Wayfinder ticket
-type works. `teach` provides a stateful, multi-session learning workspace.
+type works.
+
+### Grill-me supplements
+
+Supplements complement `grill-me` while remaining independently installable.
+The installer copies only supplement names explicitly supplied by the user.
+
+- `teach` provides a stateful, multi-session learning workspace.
 
 ### kp9z skills
 
@@ -105,6 +112,11 @@ bundles/
 │   ├── LICENSE
 │   └── skills/
 ├── plus/
+│   ├── INSTALL.md
+│   ├── manifest.json
+│   ├── LICENSE
+│   └── skills/
+├── grill-me-supplements/
 │   ├── INSTALL.md
 │   ├── manifest.json
 │   ├── LICENSE

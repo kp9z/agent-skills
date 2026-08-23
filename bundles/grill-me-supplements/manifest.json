@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "name": "grill-me-supplements",
+  "type": "named-skill-supplement-catalog",
+  "supplementsFor": "grill-me",
+  "installPolicy": "explicit-name-only",
+  "upstream": {
+    "repository": "https://github.com/mattpocock/skills.git",
+    "releaseTagPattern": "v*"
+  },
+  "bundled": {
+    "version": "1.2.3",
+    "tag": "v1.2.3",
+    "commit": "6acc160e4e0cd062dbbbd7a1b26ae92855edf07e",
+    "license": "MIT",
+    "licenseSha256": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5"
+  },
+  "skills": [
+    {
+      "name": "teach",
+      "path": "skills/teach",
+      "upstreamPath": "skills/productivity/teach"
+    }
+  ]
+}
