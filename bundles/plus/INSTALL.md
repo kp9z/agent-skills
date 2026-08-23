@@ -3,7 +3,7 @@
 Use this instruction inside the target repository. The installing agent must
 have access to a local checkout of `kp9z/agent-skills` containing this file.
 This composed bundle installs all 13 skills from `core`, then adds
-`wayfinder`, `research`, and `prototype`.
+`wayfinder`, `research`, `prototype`, and `teach`.
 
 ## Install
 
@@ -18,8 +18,8 @@ This composed bundle installs all 13 skills from `core`, then adds
 2. Read this bundle's [`manifest.json`](manifest.json) and its included
    `../core/manifest.json`. Verify that both snapshots use the same
    upstream tag and commit, all listed directories exist, and their combined
-   skill names are unique. The local composition must contain exactly 16
-   skills: 13 Core skills and the 3 skills listed in this manifest.
+   skill names are unique. The local composition must contain exactly 17
+   skills: 13 Core skills and the 4 skills listed in this manifest.
 3. Check for a newer stable upstream release before every installation:
    - Run `git ls-remote --refs --tags https://github.com/mattpocock/skills.git
      'refs/tags/v*'`.
@@ -63,7 +63,7 @@ This composed bundle installs all 13 skills from `core`, then adds
    `wayfinder:research`, `wayfinder:prototype`, `wayfinder:grilling`, and
    `wayfinder:task`. Reuse matching labels and create only missing labels.
 9. Validate:
-   - All 16 composed skills are discoverable by the active harness.
+   - All 17 composed skills are discoverable by the active harness.
    - Every copied skill includes its complete directory contents.
    - Generated project documentation links resolve.
    - The selected instruction file contains one `## Agent skills` section.

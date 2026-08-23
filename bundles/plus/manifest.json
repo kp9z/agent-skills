@@ -35,6 +35,11 @@
       "name": "prototype",
       "path": "skills/prototype",
       "upstreamPath": "skills/engineering/prototype"
+    },
+    {
+      "name": "teach",
+      "path": "skills/teach",
+      "upstreamPath": "skills/productivity/teach"
     }
   ]
 }

@@ -12,7 +12,7 @@ performing the installation.
 | Bundle | Purpose | Install instruction |
 | --- | --- | --- |
 | `core` | The pinned 13-skill engineering workflow | [`bundles/core/INSTALL.md`](bundles/core/INSTALL.md) |
-| `plus` | Core plus Wayfinder, Research, and Prototype | [`bundles/plus/INSTALL.md`](bundles/plus/INSTALL.md) |
+| `plus` | Core plus Wayfinder, Research, Prototype, and Teach | [`bundles/plus/INSTALL.md`](bundles/plus/INSTALL.md) |
 | `kp9z-skills` | The `plan-vertical-slices` and `skill-maintenance` skills | [`bundles/kp9z-skills/INSTALL.md`](bundles/kp9z-skills/INSTALL.md) |
 | `destructive-command-hooks` | A shared destructive-command blocker with Codex and Claude Code adapters | [`bundles/destructive-command-hooks/INSTALL.md`](bundles/destructive-command-hooks/INSTALL.md) |
 
@@ -73,15 +73,16 @@ adapters only for Codex and Claude Code.
 
 ### Plus
 
-Plus composes the entire Core bundle with three additional skills:
+Plus composes the entire Core bundle with four additional skills:
 
 - `wayfinder`
 - `research`
 - `prototype`
+- `teach`
 
 `wayfinder` maps a large, uncertain effort into decision tickets. Its
 `research` and `prototype` dependencies are included so every Wayfinder ticket
-type works.
+type works. `teach` provides a stateful, multi-session learning workspace.
 
 ### kp9z skills
 
