@@ -1,0 +1,6 @@
+interface:
+  display_name: "Continue in a New Chat"
+  short_description: "Carry relevant context into a clean chat"
+  default_prompt: "Use $continue-in-new-chat to continue this work in a clean new chat."
+policy:
+  allow_implicit_invocation: false

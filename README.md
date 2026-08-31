@@ -15,6 +15,7 @@ performing the installation.
 | `plus` | Core plus Wayfinder, Research, and Prototype | [`bundles/plus/INSTALL.md`](bundles/plus/INSTALL.md) |
 | `grill-me-supplements` | Named, opt-in skills that complement `grill-me` | [`bundles/grill-me-supplements/INSTALL.md`](bundles/grill-me-supplements/INSTALL.md) |
 | `kp9z-skills` | The `plan-vertical-slices` and `skill-maintenance` skills | [`bundles/kp9z-skills/INSTALL.md`](bundles/kp9z-skills/INSTALL.md) |
+| `codex-essential` | Personal Codex workflow essentials | [`bundles/codex-essential/INSTALL.md`](bundles/codex-essential/INSTALL.md) |
 | `destructive-command-hooks` | A shared destructive-command blocker with Codex and Claude Code adapters | [`bundles/destructive-command-hooks/INSTALL.md`](bundles/destructive-command-hooks/INSTALL.md) |
 
 ## How bundles work
@@ -96,6 +97,12 @@ The installer copies only supplement names explicitly supplied by the user.
 The two original skills are stored together without assuming a harness-specific
 installation directory. Each complete skill directory is copied as one unit.
 
+### Codex Essential
+
+Codex Essential contains personal workflow skills that should remain available
+across projects. `continue-in-new-chat` distills the useful state of the current
+chat and continues the work in a clean Codex task.
+
 ### Destructive-command hooks
 
 The hook bundle stores one shared Python implementation plus separate merge
@@ -122,6 +129,10 @@ bundles/
 │   ├── LICENSE
 │   └── skills/
 ├── kp9z-skills/
+│   ├── INSTALL.md
+│   ├── manifest.json
+│   └── skills/
+├── codex-essential/
 │   ├── INSTALL.md
 │   ├── manifest.json
 │   └── skills/
