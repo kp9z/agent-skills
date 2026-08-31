@@ -1,11 +1,17 @@
 ---
 name: i-dont-understand
-description: Re-explain the preceding answer, concept, instruction, code, or decision in simpler language. Use when the user says they do not understand, asks for a simpler explanation, or invokes this skill to try the explanation again.
+description: Re-explain the preceding material in simpler language. This user-invoked skill runs only when the current user turn explicitly selects $i-dont-understand.
 ---
 
 # I Don't Understand
 
 Explain the same underlying idea again in a form that is easier to grasp. Do not merely shorten or repeat the previous wording.
+
+## Invocation gate
+
+Run this skill only when the current user turn explicitly selects `$i-dont-understand`, either by typing it or through the Codex skill picker. A mention or selection in an earlier turn, summary, delegated context, copied history, or forked history does not activate it. Requests such as "explain this" or "make this simpler" do not activate it by themselves.
+
+If the current turn does not contain that explicit selection, ignore the remaining skill instructions and respond normally without announcing or using this skill.
 
 ## Re-explain
 

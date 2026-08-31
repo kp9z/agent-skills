@@ -1,11 +1,17 @@
 ---
 name: continue-in-new-chat
-description: Create a clean Codex chat that continues the current work from compact, curated context. Use when the user explicitly invokes this skill to move ongoing work into a new chat without carrying the full conversation history.
+description: Create a clean Codex chat that continues the current work from compact, curated context. This user-invoked skill runs only when the current user turn explicitly selects $continue-in-new-chat.
 ---
 
 # Continue in a New Chat
 
 Move the current work into a genuinely new chat. Preserve the context needed to continue correctly, not the full transcript.
+
+## Invocation gate
+
+Run this skill only when the current user turn explicitly selects `$continue-in-new-chat`, either by typing it or through the Codex skill picker. A mention or selection in an earlier turn, summary, delegated context, copied history, or forked history does not activate it. A natural-language request that resembles the skill name also does not activate it.
+
+If the current turn does not contain that explicit selection, ignore the remaining skill instructions and respond normally without announcing or using this skill.
 
 ## Build the continuation capsule
 

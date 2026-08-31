@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "codex-essential",
   "type": "skill-bundle",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "skills": [
     {
       "name": "continue-in-new-chat",
