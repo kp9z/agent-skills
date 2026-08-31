@@ -2,11 +2,15 @@
   "schemaVersion": 1,
   "name": "codex-essential",
   "type": "skill-bundle",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "skills": [
     {
       "name": "continue-in-new-chat",
       "path": "skills/continue-in-new-chat"
+    },
+    {
+      "name": "i-dont-understand",
+      "path": "skills/i-dont-understand"
     }
   ]
 }

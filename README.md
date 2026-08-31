@@ -101,7 +101,9 @@ installation directory. Each complete skill directory is copied as one unit.
 
 Codex Essential contains personal workflow skills that should remain available
 across projects. `continue-in-new-chat` distills the useful state of the current
-chat and continues the work in a clean Codex task.
+chat and continues the work in a clean Codex task. `i-dont-understand`
+re-explains difficult material in simpler language without discarding important
+accuracy.
 
 ### Destructive-command hooks
 

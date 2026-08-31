@@ -1,0 +1,4 @@
+interface:
+  display_name: "I Don't Understand"
+  short_description: "Explain the previous idea in simpler terms"
+  default_prompt: "Use $i-dont-understand to explain the previous answer more simply."
