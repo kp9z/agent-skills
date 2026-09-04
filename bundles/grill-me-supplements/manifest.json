@@ -20,6 +20,19 @@
       "name": "teach",
       "path": "skills/teach",
       "upstreamPath": "skills/productivity/teach"
+    },
+    {
+      "name": "show-me",
+      "path": "skills/show-me",
+      "upstream": {
+        "repository": "https://github.com/humanlayer/skills.git",
+        "ref": "main",
+        "commit": "3c2629142c5d437428269b1b722b08c0b87f574d",
+        "path": "plugins/show-me/skills/show-me",
+        "version": "1.0.1",
+        "license": "MIT",
+        "skillSha256": "bea6da70a58096730b9aeb0bae293ddf4726103a98efc9ce13c481619942a810"
+      }
     }
   ]
 }

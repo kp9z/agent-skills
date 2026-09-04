@@ -89,8 +89,12 @@ type works.
 
 Supplements complement `grill-me` while remaining independently installable.
 The installer copies only supplement names explicitly supplied by the user.
+Each supplement keeps its own upstream metadata when it comes from a different
+source.
 
 - `teach` provides a stateful, multi-session learning workspace.
+- `show-me` explains the current topic with concise diagrams, code-shape
+  sketches, and focused HTML artifacts.
 
 ### kp9z skills
 
