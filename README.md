@@ -107,7 +107,8 @@ Codex Essential contains personal workflow skills that should remain available
 across projects. `continue-in-new-chat` distills the useful state of the current
 chat and continues the work in a clean Codex task. `i-dont-understand`
 re-explains difficult material in simpler language without discarding important
-accuracy.
+accuracy. `merge` merges the current chat's work into `main`, pushes the result,
+and archives the chat after the merge succeeds.
 
 ### Destructive-command hooks
 

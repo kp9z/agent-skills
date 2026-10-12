@@ -1,0 +1,4 @@
+interface:
+  display_name: "Merge"
+  short_description: "Merge into main, then archive this chat"
+  default_prompt: "Use $merge to merge this chat's work into main, push it, then archive this chat."
