@@ -1,0 +1,7 @@
+interface:
+  display_name: "Merge and Archive"
+  short_description: "Merge into main, then archive this chat"
+  default_prompt: "Use $merge_and_archive to merge this chat's work into main, push it, then archive this chat."
+
+policy:
+  allow_implicit_invocation: false

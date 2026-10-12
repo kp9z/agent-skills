@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "codex-essential",
   "type": "skill-bundle",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "skills": [
     {
       "name": "continue-in-new-chat",
@@ -13,8 +13,8 @@
       "path": "skills/i-dont-understand"
     },
     {
-      "name": "merge",
-      "path": "skills/merge"
+      "name": "merge_and_archive",
+      "path": "skills/merge_and_archive"
     }
   ]
 }
