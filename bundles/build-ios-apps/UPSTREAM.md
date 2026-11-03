@@ -1,5 +1,8 @@
 # Upstream snapshot
 
+- Original URL: [OpenAI Build iOS Apps](https://github.com/openai/plugins/tree/main/plugins/build-ios-apps)
+- Update policy: before every installation, check the official `main` snapshot
+  for changes to this plugin and follow the selection steps in [INSTALL.md](INSTALL.md).
 - Source: https://github.com/openai/plugins/tree/0722921d5542fc593105c27bd52630babd8b8c2a/plugins/build-ios-apps
 - Repository: `openai/plugins`
 - Path: `plugins/build-ios-apps`

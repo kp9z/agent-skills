@@ -3,6 +3,30 @@
 This bundle preserves the complete upstream plugin. Read [manifest.json](manifest.json)
 and [UPSTREAM.md](UPSTREAM.md) before installing.
 
+## Check official updates before every installation
+
+Original source: [OpenAI Build iOS Apps](https://github.com/openai/plugins/tree/main/plugins/build-ios-apps).
+
+1. Read `source` in the bundle manifest. Resolve the official repository's
+   `main` branch to an exact commit, then compare `plugins/build-ios-apps`
+   at that commit with the bundled `source.commit`. Compare the directory's
+   Git tree hash or its file hashes and modes, not just the plugin version
+   or repository commit: unrelated repository changes are not plugin updates.
+2. If the plugin differs, summarize the changes and ask whether to install
+   that exact official snapshot or the bundled snapshot. Do not silently
+   replace the bundled payload or overwrite local modifications.
+3. When the user selects the official update, fetch the complete plugin
+   directory at the resolved commit. Discover its skills and MCP configuration
+   from that snapshot's plugin manifest, preserve all references and script
+   permissions, and follow the installation steps below using that snapshot.
+   The bundled skill list describes only the pinned bundled snapshot.
+4. If the source cannot be checked, report the failure and ask whether to
+   continue with the bundled snapshot. Never claim it is current without
+   checking. Report the selected source URL, exact commit, plugin version,
+   and update-check result after installation.
+
+## Install the selected snapshot
+
 1. Determine the active harness and its documented skill directory. For Codex,
    use the project's `.agents/skills`; for Claude Code, use `.claude/skills`;
    for Hermes, use `~/.hermes/skills`. Resolve other harness destinations first.
