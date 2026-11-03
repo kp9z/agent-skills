@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "name": "build-ios-apps",
+  "type": "skill-bundle",
+  "version": "0.1.2",
+  "source": {
+    "repository": "https://github.com/openai/plugins",
+    "path": "plugins/build-ios-apps",
+    "commit": "0722921d5542fc593105c27bd52630babd8b8c2a",
+    "license": "MIT (declared in upstream plugin manifest)"
+  },
+  "skills": [
+    {
+      "name": "ios-app-intents",
+      "path": "skills/ios-app-intents"
+    },
+    {
+      "name": "ios-debugger-agent",
+      "path": "skills/ios-debugger-agent"
+    },
+    {
+      "name": "ios-ettrace-performance",
+      "path": "skills/ios-ettrace-performance"
+    },
+    {
+      "name": "ios-memgraph-leaks",
+      "path": "skills/ios-memgraph-leaks"
+    },
+    {
+      "name": "ios-simulator-browser",
+      "path": "skills/ios-simulator-browser"
+    },
+    {
+      "name": "swiftui-liquid-glass",
+      "path": "skills/swiftui-liquid-glass"
+    },
+    {
+      "name": "swiftui-performance-audit",
+      "path": "skills/swiftui-performance-audit"
+    },
+    {
+      "name": "swiftui-ui-patterns",
+      "path": "skills/swiftui-ui-patterns"
+    },
+    {
+      "name": "swiftui-view-refactor",
+      "path": "skills/swiftui-view-refactor"
+    }
+  ]
+}
