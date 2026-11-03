@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "build-ios-apps",
   "type": "skill-bundle",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "source": {
     "repository": "https://github.com/openai/plugins",
     "url": "https://github.com/openai/plugins/tree/main/plugins/build-ios-apps",
@@ -10,7 +10,8 @@
     "checkForUpdatesBeforeInstall": true,
     "path": "plugins/build-ios-apps",
     "commit": "0722921d5542fc593105c27bd52630babd8b8c2a",
-    "license": "MIT (declared in upstream plugin manifest)"
+    "license": "MIT (declared in upstream plugin manifest)",
+    "version": "0.1.2"
   },
   "skills": [
     {
@@ -48,6 +49,15 @@
     {
       "name": "swiftui-view-refactor",
       "path": "skills/swiftui-view-refactor"
+    },
+    {
+      "name": "ios-testing",
+      "path": "skills/ios-testing",
+      "source": {
+        "repository": "https://github.com/kp9z/agent-skills",
+        "path": "bundles/build-ios-apps/skills/ios-testing",
+        "version": "1.0.0"
+      }
     }
   ]
 }

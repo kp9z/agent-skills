@@ -11,7 +11,7 @@ performing the installation.
 
 | Bundle | Purpose | Install instruction |
 | --- | --- | --- |
-| `build-ios-apps` | Nine iOS and SwiftUI skills with XcodeBuildMCP configuration | [`bundles/build-ios-apps/INSTALL.md`](bundles/build-ios-apps/INSTALL.md) |
+| `build-ios-apps` | Nine OpenAI iOS skills plus local testing guidance | [`bundles/build-ios-apps/INSTALL.md`](bundles/build-ios-apps/INSTALL.md) |
 | `core` | The pinned 13-skill engineering workflow | [`bundles/core/INSTALL.md`](bundles/core/INSTALL.md) |
 | `plus` | Core plus Wayfinder, Research, and Prototype | [`bundles/plus/INSTALL.md`](bundles/plus/INSTALL.md) |
 | `grill-me-supplements` | Named, opt-in skills that complement `grill-me` | [`bundles/grill-me-supplements/INSTALL.md`](bundles/grill-me-supplements/INSTALL.md) |
@@ -42,7 +42,9 @@ appropriate destination.
 
 The complete OpenAI plugin snapshot includes nine skills for App Intents,
 SwiftUI, Simulator debugging and browser mirroring, performance profiling,
-and memory leak investigation. Installation and source details are in
+and memory leak investigation. The local `ios-testing` skill adds Swift Testing,
+XCTest, and XCUITest workflows and remains included when upstream is refreshed.
+Installation and source details are in
 [`bundles/build-ios-apps/INSTALL.md`](bundles/build-ios-apps/INSTALL.md) and
 [`bundles/build-ios-apps/UPSTREAM.md`](bundles/build-ios-apps/UPSTREAM.md).
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "iOS Testing"
+  short_description: "Write and run reliable iOS regression and UI tests"
+  default_prompt: "Use $ios-testing to add and run focused iOS tests for the changed behavior, then report the execution evidence."
