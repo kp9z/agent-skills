@@ -1,0 +1,4 @@
+interface:
+  display_name: "iOS Test Planner"
+  short_description: "Plan iOS test scenarios and setup for user approval"
+  default_prompt: "Use $ios-test-planner to inspect this feature and propose test scenarios with initial state, environment, and settings for my approval before building and running them."

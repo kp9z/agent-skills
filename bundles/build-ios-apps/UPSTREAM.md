@@ -14,14 +14,14 @@
 
 This is a directory snapshot in `kp9z/agent-skills`. Original authorship and
 plugin metadata remain intact. `INSTALL.md`, `manifest.json`, and this file
-are repository-specific additions. `skills/ios-testing` is also repository-owned
-and is not part of the OpenAI snapshot. Bundle version `0.2.0` includes this
-addition; the imported official plugin remains version `0.1.2`. The upstream
-README's original path refers to its source repository; the local plugin root
-is `bundles/build-ios-apps`.
+are repository-specific additions. `skills/ios-testing` and
+`skills/ios-test-planner` are repository-owned additions. Bundle version `0.3.0`
+includes these additions; the imported official plugin remains version `0.1.2`.
+The upstream README's original path refers to its source repository; the local
+plugin root is `bundles/build-ios-apps`.
 
 To refresh, compare against this pinned commit, replace only the imported
 payload with the selected upstream snapshot, preserve modes, update source
 metadata and official version, and verify all imported Git blob hashes before
-publishing. Preserve `skills/ios-testing` and its manifest entry across refreshes;
-resolve any future upstream name collision explicitly.
+publishing. Preserve both local skill directories and their manifest entries
+across refreshes; resolve any future upstream name collision explicitly.

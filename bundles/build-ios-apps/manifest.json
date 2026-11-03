@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "build-ios-apps",
   "type": "skill-bundle",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "source": {
     "repository": "https://github.com/openai/plugins",
     "url": "https://github.com/openai/plugins/tree/main/plugins/build-ios-apps",
@@ -56,6 +56,15 @@
       "source": {
         "repository": "https://github.com/kp9z/agent-skills",
         "path": "bundles/build-ios-apps/skills/ios-testing",
+        "version": "1.1.0"
+      }
+    },
+    {
+      "name": "ios-test-planner",
+      "path": "skills/ios-test-planner",
+      "source": {
+        "repository": "https://github.com/kp9z/agent-skills",
+        "path": "bundles/build-ios-apps/skills/ios-test-planner",
         "version": "1.0.0"
       }
     }

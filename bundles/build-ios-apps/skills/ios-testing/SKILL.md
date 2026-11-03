@@ -7,6 +7,12 @@ description: Write, run, and diagnose iOS tests using Swift Testing, XCTest, and
 
 Produce tests that verify requirements and report evidence from actual execution.
 
+For an open-ended request such as "test login" without agreed scenarios,
+first follow [ios-test-planner](../ios-test-planner/SKILL.md). Present concrete
+scenarios and wait for agreement before creating or running tests. Continue
+here directly for an approved plan, an explicitly requested existing test run,
+or a concrete implementation request that already specifies the test behavior.
+
 ## Choose the scope and framework
 
 - Inspect repository instructions, test targets, shared schemes, test plans,
