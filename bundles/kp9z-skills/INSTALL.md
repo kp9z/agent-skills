@@ -16,7 +16,13 @@ have access to a local checkout of `kp9z/agent-skills` containing this file.
    If an existing skill differs, show the conflict and ask before replacing it.
 4. Copy each complete listed skill directory to the harness's project-local
    skill directory. Preserve unrelated skills.
-5. Validate that both skills are discoverable, their `SKILL.md` names match
+5. For `to_ticket_yolo`, verify that the target environment also has Core's
+   `to-spec` and `to-tickets` skills and project tracker configuration. If missing,
+   follow [`../core/INSTALL.md`](../core/INSTALL.md) for the dependencies and its
+   setup instructions for tracker configuration before using the workflow.
+   Preserve `disable-model-invocation: true` and Codex's
+   `policy.allow_implicit_invocation: false`; this skill is user-invoked only.
+6. Validate that all listed skills are discoverable, their `SKILL.md` names match
    their directory names, and every bundled reference resolves.
 
 At the end, report the bundle version, destination, installed or unchanged

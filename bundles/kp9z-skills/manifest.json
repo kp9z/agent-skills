@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "kp9z-skills",
   "type": "skill-bundle",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "skills": [
     {
       "name": "plan-vertical-slices",
@@ -11,6 +11,10 @@
     {
       "name": "skill-maintenance",
       "path": "skills/skill-maintenance"
+    },
+    {
+      "name": "to_ticket_yolo",
+      "path": "skills/to_ticket_yolo"
     }
   ]
 }

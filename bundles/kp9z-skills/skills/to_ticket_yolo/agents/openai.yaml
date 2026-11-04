@@ -1,0 +1,6 @@
+interface:
+  display_name: "To Ticket YOLO"
+  short_description: "Publish a spec and linked tickets without approval pauses"
+  default_prompt: "Use $to_ticket_yolo to turn the current conversation into a spec, then publish linked implementation tickets without waiting for my approval."
+policy:
+  allow_implicit_invocation: false

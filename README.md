@@ -15,7 +15,7 @@ performing the installation.
 | `core` | The pinned 13-skill engineering workflow | [`bundles/core/INSTALL.md`](bundles/core/INSTALL.md) |
 | `plus` | Core plus Wayfinder, Research, and Prototype | [`bundles/plus/INSTALL.md`](bundles/plus/INSTALL.md) |
 | `grill-me-supplements` | Named, opt-in skills that complement `grill-me` | [`bundles/grill-me-supplements/INSTALL.md`](bundles/grill-me-supplements/INSTALL.md) |
-| `kp9z-skills` | The `plan-vertical-slices` and `skill-maintenance` skills | [`bundles/kp9z-skills/INSTALL.md`](bundles/kp9z-skills/INSTALL.md) |
+| `kp9z-skills` | Original planning, skill maintenance, and spec-to-ticket workflows | [`bundles/kp9z-skills/INSTALL.md`](bundles/kp9z-skills/INSTALL.md) |
 | `codex-essential` | Personal Codex workflow essentials | [`bundles/codex-essential/INSTALL.md`](bundles/codex-essential/INSTALL.md) |
 | `destructive-command-hooks` | A shared destructive-command blocker with Codex and Claude Code adapters | [`bundles/destructive-command-hooks/INSTALL.md`](bundles/destructive-command-hooks/INSTALL.md) |
 
@@ -112,8 +112,17 @@ source.
 
 ### kp9z skills
 
-The two original skills are stored together without assuming a harness-specific
+The original skills are stored together without assuming a harness-specific
 installation directory. Each complete skill directory is copied as one unit.
+
+- `plan-vertical-slices` plans runnable, verifiable software milestones.
+- `skill-maintenance` audits skill collections and their context pointers.
+- `to_ticket_yolo` runs Core's `to-spec` then `to-tickets`, publishing a spec and
+  linked issues without approval pauses. It requires those two skills and project
+  tracker configuration, and runs only when explicitly invoked as
+  `$to_ticket_yolo` or `/to_ticket_yolo`.
+
+The underscore spelling of `to_ticket_yolo` preserves its requested invocation name.
 
 ### Codex Essential
 
