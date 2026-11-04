@@ -122,7 +122,12 @@ installation directory. Each complete skill directory is copied as one unit.
   tracker configuration, and runs only when explicitly invoked as
   `$to_ticket_yolo` or `/to_ticket_yolo`.
 
-The underscore spelling of `to_ticket_yolo` preserves its requested invocation name.
+- `push_to_testflight` archives and uploads the current production iOS app through
+  its configured CLI workflow. It runs only as `$push_to_testflight` or
+  `/push_to_testflight`, preserves the app version, and ends after upload.
+
+The underscore spellings of `to_ticket_yolo` and `push_to_testflight` preserve
+their requested invocation names.
 
 ### Codex Essential
 

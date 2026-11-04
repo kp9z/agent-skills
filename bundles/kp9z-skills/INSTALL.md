@@ -22,7 +22,10 @@ have access to a local checkout of `kp9z/agent-skills` containing this file.
    setup instructions for tracker configuration before using the workflow.
    Preserve `disable-model-invocation: true` and Codex's
    `policy.allow_implicit_invocation: false`; this skill is user-invoked only.
-6. Validate that all listed skills are discoverable, their `SKILL.md` names match
+6. For `push_to_testflight`, preserve its explicit-only invocation flags and
+   install it only into the requested project's skill directory. It requires a
+   configured production iOS CLI release workflow and Xcode signing access.
+7. Validate that all listed skills are discoverable, their `SKILL.md` names match
    their directory names, and every bundled reference resolves.
 
 At the end, report the bundle version, destination, installed or unchanged
