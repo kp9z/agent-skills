@@ -25,7 +25,13 @@ have access to a local checkout of `kp9z/agent-skills` containing this file.
 6. For `push_to_testflight`, preserve its explicit-only invocation flags and
    install it only into the requested project's skill directory. It requires a
    configured production iOS CLI release workflow and Xcode signing access.
-7. Validate that all listed skills are discoverable, their `SKILL.md` names match
+7. For `ticket_marathon`, verify Core's `implement` skill and its testing and
+   review dependencies, project tracker configuration, and Codex app scheduling
+   tools are available. Preserve both explicit-only invocation flags. Each batch
+   implements up to three dependency-ready tickets sequentially; continuations
+   run 4 hours 30 minutes after batch completion. On a harness without compatible
+   scheduling tools, report that unattended continuation is unavailable.
+8. Validate that all listed skills are discoverable, their `SKILL.md` names match
    their directory names, and every bundled reference resolves.
 
 At the end, report the bundle version, destination, installed or unchanged
