@@ -1,6 +1,6 @@
 ---
 name: push_to_testflight
-description: Archive the current production iOS app and upload it to TestFlight through the project's CLI workflow.
+description: Archive the current production iOS app and upload it to TestFlight through the project's CLI workflow, optionally specifying the app version.
 disable-model-invocation: true
 ---
 
@@ -8,10 +8,19 @@ disable-model-invocation: true
 
 Run only when the user explicitly invokes `$push_to_testflight` or `/push_to_testflight`. Invocation authorizes archiving and uploading the current project's production app to TestFlight. Finish after reporting the command result; do not open Chrome, monitor Apple processing, assign tester groups, or release to the App Store.
 
+## Usage
+
+```text
+$push_to_testflight [version]
+/push_to_testflight [version]
+```
+
+`version` is an optional positional marketing version, such as `1.0.1`. For example, `$push_to_testflight 1.0.1` archives and uploads version `1.0.1` with a separately selected build number. Accept numeric `x.y` or `x.y.z`; stop and report invalid or extra arguments before running release commands. Treat the supplied version as the intended version even when configuration or older archives differ. Pass it explicitly through the project's version override to archive and upload commands (and any required validation/export commands). When omitted, resolve the version from the user's release context or current release configuration as below.
+
 ## Resolve the release
 
 1. Read the project's agent instructions, release script, and release configuration. Follow a release-document pointer when present. Use the production target, bundle ID, signing team, and distribution scope already configured by the project. In SkinSense, read `scripts/release.sh` and `docs/implementation/release.md`; its script uses Release and internal-only TestFlight distribution. Other projects must supply their own supported CLI workflow; do not invent signing settings.
-2. Preserve the app version selected by the user or current release configuration, including three-part versions such as `1.0.1`. Keep the marketing version separate from the build number: `1.0.1 (5)` means version `1.0.1`, build `5`. Never bump the app version merely to resolve a duplicate build number. If conversation, configuration, and archives disagree about the intended version, resolve that ambiguity before archiving.
+2. Use the version argument when supplied. Otherwise preserve the app version selected by the user or current release configuration, including three-part versions such as `1.0.1`; resolve any ambiguity between conversation, configuration, and archives before archiving. Keep the marketing version separate from the build number: `1.0.1 (5)` means version `1.0.1`, build `5`. Never bump the app version merely to resolve a duplicate build number.
 3. Inspect existing archives, upload logs, and release records for the intended app. If configured API access is available, query Apple's existing builds through that access. Choose a positive integer greater than the known build numbers, including manual uploads disclosed by the user. Local files alone cannot prove a number is unused on Apple. Announce the selected version/build and source commit, then proceed within the user's request.
 
 ## Build and upload
