@@ -126,10 +126,12 @@ installation directory. Each complete skill directory is copied as one unit.
   its configured CLI workflow. It runs only as `$push_to_testflight` or
   `/push_to_testflight`, preserves the app version, and ends after upload.
 
-- `ticket_marathon` runs Core's `implement` on one dependency-ready ticket at a
-  time, up to three per batch, then schedules continuation after 4 hours 30 minutes
-  until the queue is empty or intervention is required. It requires project tracker
-  configuration and Codex app scheduling tools, and starts only through explicit
+- `ticket_marathon` keeps the main chat as an orchestrator: it checks dependencies,
+  delegates each ticket to a new chat running Core's `implement`, and waits for its
+  result before selecting the next. It processes up to three tickets per batch,
+  then schedules continuation after 4 hours 30 minutes until the queue is empty or
+  intervention is required. It requires project tracker configuration and Codex app
+  chat and scheduling tools, and starts only through explicit
   `$ticket_marathon` or `/ticket_marathon` invocation.
 
 The underscore spellings of `to_ticket_yolo`, `push_to_testflight`, and `ticket_marathon` preserve
