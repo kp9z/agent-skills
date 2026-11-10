@@ -31,7 +31,12 @@ have access to a local checkout of `kp9z/agent-skills` containing this file.
    implements up to three dependency-ready tickets sequentially; continuations
    run 4 hours 30 minutes after batch completion. On a harness without compatible
    scheduling tools, report that unattended continuation is unavailable.
-8. Validate that all listed skills are discoverable, their `SKILL.md` names match
+8. For `grill-me-in-batch`, verify Core’s `grilling` skill is installed beside
+   it. If missing, follow [`../core/INSTALL.md`](../core/INSTALL.md) for that
+   dependency before using the interview. Preserve `disable-model-invocation:
+   true` and Codex’s `policy.allow_implicit_invocation: false`; this skill is
+   user-invoked only.
+9. Validate that all listed skills are discoverable, their `SKILL.md` names match
    their directory names, and every bundled reference resolves.
 
 At the end, report the bundle version, destination, installed or unchanged

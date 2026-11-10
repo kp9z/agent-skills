@@ -1,0 +1,5 @@
+interface:
+  display_name: "Grill Me in Batch"
+  short_description: "Sharpen multiple features in one interview"
+policy:
+  allow_implicit_invocation: false

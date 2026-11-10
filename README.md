@@ -117,6 +117,9 @@ installation directory. Each complete skill directory is copied as one unit.
 
 - `plan-vertical-slices` plans runnable, verifiable software milestones.
 - `skill-maintenance` audits skill collections and their context pointers.
+- `grill-me-in-batch` sharpens multiple features in one chat, tracking shared
+  decisions and dependencies. It requires Core’s `grilling` skill and runs only
+  through explicit `$grill-me-in-batch` or `/grill-me-in-batch` invocation.
 - `to_ticket_yolo` runs Core's `to-spec` then `to-tickets`, publishing a spec and
   linked issues without approval pauses. It requires those two skills and project
   tracker configuration, and runs only when explicitly invoked as

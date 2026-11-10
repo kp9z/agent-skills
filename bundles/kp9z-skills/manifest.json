@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "kp9z-skills",
   "type": "skill-bundle",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "skills": [
     {
       "name": "plan-vertical-slices",
@@ -23,6 +23,10 @@
     {
       "name": "ticket_marathon",
       "path": "skills/ticket_marathon"
+    },
+    {
+      "name": "grill-me-in-batch",
+      "path": "skills/grill-me-in-batch"
     }
   ]
 }
