@@ -137,8 +137,13 @@ installation directory. Each complete skill directory is copied as one unit.
   chat and scheduling tools, and starts only through explicit
   `$ticket_marathon` or `/ticket_marathon` invocation.
 
-The underscore spellings of `to_ticket_yolo`, `push_to_testflight`, and `ticket_marathon` preserve
-their requested invocation names.
+- `harness_improver` investigates the current chat and related workers for recurring
+  workflow blockers, then proposes reusable harness fixes with evidence and quality
+  checks. It includes issue read/write, bounded history and test-result helpers,
+  and runs only through explicit `$harness_improver` or `/harness_improver` invocation.
+
+The underscore spellings of `to_ticket_yolo`, `push_to_testflight`, `ticket_marathon`,
+and `harness_improver` preserve their requested invocation names.
 
 ### Codex Essential
 

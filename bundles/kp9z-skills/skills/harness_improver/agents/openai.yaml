@@ -1,0 +1,6 @@
+interface:
+  display_name: "Harness Improver"
+  short_description: "Find recurring friction and build better agent harnesses"
+  default_prompt: "Use $harness_improver to investigate this chat and its related runners for recurring blockers and propose reusable harness improvements."
+policy:
+  allow_implicit_invocation: false

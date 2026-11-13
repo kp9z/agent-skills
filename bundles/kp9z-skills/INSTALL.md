@@ -36,7 +36,13 @@ have access to a local checkout of `kp9z/agent-skills` containing this file.
    dependency before using the interview. Preserve `disable-model-invocation:
    true` and Codex’s `policy.allow_implicit_invocation: false`; this skill is
    user-invoked only.
-9. Validate that all listed skills are discoverable, their `SKILL.md` names match
+9. For `harness_improver`, preserve both explicit-only invocation flags and copy
+   the complete directory, including scripts, references and helper tests. Python 3
+   is required; GitHub operations additionally require authenticated `gh`. Chat
+   inspection uses available chat tools or explicitly supplied local exports.
+   No audit implicitly authorizes mutations or publishing. Run its offline checks
+   with `python3 -m unittest discover -s <skill-directory>/tests`.
+10. Validate that all listed skills are discoverable, their `SKILL.md` names match
    their directory names, and every bundled reference resolves.
 
 At the end, report the bundle version, destination, installed or unchanged

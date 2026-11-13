@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "kp9z-skills",
   "type": "skill-bundle",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "skills": [
     {
       "name": "plan-vertical-slices",
@@ -27,6 +27,10 @@
     {
       "name": "grill-me-in-batch",
       "path": "skills/grill-me-in-batch"
+    },
+    {
+      "name": "harness_improver",
+      "path": "skills/harness_improver"
     }
   ]
 }
