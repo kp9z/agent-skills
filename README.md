@@ -57,7 +57,9 @@ Installation and source details are in
 kFlows combines the personal workflows with the engineering skills from the
 existing Matt Pocock v1.3.2 installation. Source metadata is recorded per skill
 in the manifest, and the upstream MIT license is preserved. Each complete skill
-directory is installed as one unit.
+directory is installed as one unit. Codex installs kFlows at user level in
+`~/.agents/skills`; each project keeps its own `AGENTS.md`, GitHub tracker
+configuration, label mapping, and domain rules. The iOS bundle stays project-local.
 
 - `setup-kflows` configures GitHub Issues, canonical labels, and the root
   `AGENTS.md`. Its `$setup-kflows triage` mode handles issue triage using bundled

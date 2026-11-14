@@ -4,6 +4,11 @@ Python 3 standard library only. Run these from the installed skill directory or 
 
 ## GitHub issues
 
+The bundled `scripts/issues.py` is usable directly for authorized issue reads or
+writes without invoking this audit skill. It includes the same issue client as
+the existing personal `_shared/issue-tracker` installation, keeping this skill
+portable. Preserve that standalone installation when migrating other consumers.
+
 ```sh
 python3 scripts/issues.py --repo OWNER/REPO list --state open --label ready-for-agent
 python3 scripts/issues.py --repo OWNER/REPO read 58
