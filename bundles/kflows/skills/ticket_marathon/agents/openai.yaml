@@ -1,6 +1,6 @@
 interface:
   display_name: "Ticket Marathon"
   short_description: "Run ticket batches with scheduled or continuous mode"
-  default_prompt: "Use $ticket_marathon as an orchestrator only: delegate each dependency-ready ticket to a new chat, wait for its result before the next, process up to three per batch, and use scheduled continuation after 4 hours 30 minutes unless I request continuous execution until finished. Stay quiet on unchanged worker status."
+  default_prompt: "Use $ticket_marathon as an orchestrator only: delegate each dependency-ready ticket to a new chat, wait for its result or promptly defer blocked work and continue independent tickets with isolated checkouts and Simulator resources, process up to three per batch, and use scheduled continuation after 4 hours 30 minutes unless I request continuous execution until finished. Stay quiet on unchanged worker status."
 policy:
   allow_implicit_invocation: false
