@@ -14,8 +14,8 @@
 
 This is a directory snapshot in `kp9z/agent-skills`. Original authorship and
 plugin metadata remain intact. `INSTALL.md`, `manifest.json`, and this file
-are repository-specific additions. `skills/ios-testing` and
-`skills/ios-test-planner` are repository-owned additions. Bundle version `0.4.0`
+are repository-specific additions. `skills/ios-testing`,
+`skills/ios-test-planner`, and `skills/push_to_testflight` are repository-owned additions. Bundle version `0.5.0`
 includes these additions and the separately sourced `skills/apple-design`; the imported official plugin remains version `0.1.2`.
 The upstream README's original path refers to its source repository; the local
 plugin root is `bundles/build-ios-apps`.
@@ -23,7 +23,7 @@ plugin root is `bundles/build-ios-apps`.
 To refresh, compare against this pinned commit, replace only the imported
 payload with the selected upstream snapshot, preserve modes, update source
 metadata and official version, and verify all imported Git blob hashes before
-publishing. Preserve all three additional skill directories and their manifest entries
+publishing. Preserve all four additional skill directories and their manifest entries
 across refreshes; resolve any future upstream name collision explicitly.
 
 ## Apple design snapshot

@@ -11,7 +11,7 @@ performing the installation.
 
 | Bundle | Purpose | Install instruction |
 | --- | --- | --- |
-| `build-ios-apps` | Nine OpenAI iOS skills, testing, and Apple design review | [`bundles/build-ios-apps/INSTALL.md`](bundles/build-ios-apps/INSTALL.md) |
+| `build-ios-apps` | Nine OpenAI iOS skills, testing, design review, and TestFlight upload | [`bundles/build-ios-apps/INSTALL.md`](bundles/build-ios-apps/INSTALL.md) |
 | `core` | The pinned 13-skill engineering workflow | [`bundles/core/INSTALL.md`](bundles/core/INSTALL.md) |
 | `kflows` | Personal planning, implementation, maintenance, and merge workflows | [`bundles/kflows/INSTALL.md`](bundles/kflows/INSTALL.md) |
 | `destructive-command-hooks` | A shared destructive-command blocker with Codex and Claude Code adapters | [`bundles/destructive-command-hooks/INSTALL.md`](bundles/destructive-command-hooks/INSTALL.md) |
@@ -48,6 +48,10 @@ local skills remain included when upstream is refreshed. The bundled
 Installation and source details are in
 [`bundles/build-ios-apps/INSTALL.md`](bundles/build-ios-apps/INSTALL.md) and
 [`bundles/build-ios-apps/UPSTREAM.md`](bundles/build-ios-apps/UPSTREAM.md).
+
+- `push_to_testflight` archives and uploads the current production iOS app through
+  its configured CLI workflow. It runs only as `$push_to_testflight` or
+  `/push_to_testflight`, preserves the app version, and ends after upload.
 
 ### Core
 
@@ -90,8 +94,6 @@ adapters only for Codex and Claude Code.
 The original skills are stored together without assuming a harness-specific
 installation directory. Each complete skill directory is copied as one unit.
 
-- `plan-vertical-slices` plans runnable, verifiable software milestones.
-- `skill-maintenance` audits skill collections and their context pointers.
 - `grill-me-in-batch` sharpens multiple features in one chat, tracking shared
   decisions and dependencies. It requires Core’s `grilling` skill and runs only
   through explicit `$grill-me-in-batch` or `/grill-me-in-batch` invocation.
@@ -99,10 +101,6 @@ installation directory. Each complete skill directory is copied as one unit.
   linked issues without approval pauses. It requires those two skills and project
   tracker configuration, and runs only when explicitly invoked as
   `$to_ticket_yolo` or `/to_ticket_yolo`.
-
-- `push_to_testflight` archives and uploads the current production iOS app through
-  its configured CLI workflow. It runs only as `$push_to_testflight` or
-  `/push_to_testflight`, preserves the app version, and ends after upload.
 
 - `ticket_marathon` keeps the main chat as an orchestrator: it checks dependencies,
   delegates each ticket to a new chat running Core's `implement`, and waits for its
@@ -121,7 +119,7 @@ installation directory. Each complete skill directory is copied as one unit.
   pushes the result, and keeps the chat open. It requires explicit invocation
   via `/merge-to-local-main` or `$merge-to-local-main`.
 
-The underscore spellings of `to_ticket_yolo`, `push_to_testflight`, `ticket_marathon`,
+The underscore spellings of `to_ticket_yolo`, `ticket_marathon`,
 and `harness_improver` preserve their requested invocation names.
 
 ### Destructive-command hooks
