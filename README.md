@@ -92,12 +92,16 @@ directory is installed as one unit.
   checks. It includes issue read/write, bounded history and test-result helpers,
   and runs only through explicit `$harness_improver` or `/harness_improver` invocation.
 
+- `sync_skills` compares installed skills with the collection and publishes newer
+  local versions through a review branch and PR. It runs only as `$sync_skills`
+  or `/sync_skills`, with optional skill names to narrow the scope.
+
 - `merge-to-local-main` merges the current chat's verified work into `main`,
   pushes the result, and keeps the chat open. It requires explicit invocation
   via `/merge-to-local-main` or `$merge-to-local-main`.
 
 The underscore spellings of `to_ticket_yolo`, `ticket_marathon`,
-and `harness_improver` preserve their requested invocation names.
+`harness_improver`, and `sync_skills` preserve their requested invocation names.
 
 ### Destructive-command hooks
 

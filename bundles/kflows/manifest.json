@@ -147,6 +147,10 @@
         ],
         "adaptation": "GitHub-only setup with AGENTS.md and an embedded triage mode"
       }
+    },
+    {
+      "name": "sync_skills",
+      "path": "skills/sync_skills"
     }
   ]
 }

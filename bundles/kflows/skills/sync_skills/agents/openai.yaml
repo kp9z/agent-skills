@@ -1,0 +1,6 @@
+interface:
+  display_name: "Sync Skills"
+  short_description: "Publish local skill updates to the kFlows repository"
+  default_prompt: "Use $sync_skills to publish newer local skills to kp9z/agent-skills."
+policy:
+  allow_implicit_invocation: false

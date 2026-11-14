@@ -35,7 +35,11 @@ it with upstream files would discard the kFlows setup and triage customizations.
 7. `merge-to-local-main` needs Git and authenticated push access. Install it with
    the other project skills by default; use `$CODEX_HOME/skills` or
    `~/.codex/skills` only when the user requests personal availability.
-8. Verify all manifest skills are discoverable, their names match their folders,
+8. `sync_skills` needs read access to installed skills and authenticated push/PR
+   access to `kp9z/agent-skills`. Preserve its explicit-only invocation policy.
+   It publishes local updates through a review branch, without merging or
+   modifying installations.
+9. Verify all manifest skills are discoverable, their names match their folders,
    bundled references resolve, generated project links resolve, and `AGENTS.md`
    contains one Agent skills section. Check the configured GitHub repository and
    label mapping, preserving unrelated settings.
