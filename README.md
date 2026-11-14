@@ -82,7 +82,9 @@ configuration, label mapping, and domain rules. The iOS bundle stays project-loc
 
 - `ticket_marathon` keeps the main chat as an orchestrator: it checks dependencies,
   delegates each ticket to a new chat running the included `implement`, and waits for its
-  result before selecting the next. It processes up to three tickets per batch,
+  result or promptly defers blocked work before selecting an independent ticket.
+  Deferred workers retain their partial work and approvals; independent work uses
+  isolated checkouts and Simulator resources, with verified integration before dependents. It processes up to three tickets per batch,
   then schedules continuation after 4 hours 30 minutes by default, or continues
   immediately without automations when continuous mode is requested, until the queue is empty or
   intervention is required. It requires project tracker configuration and Codex app
