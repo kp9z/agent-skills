@@ -1,4 +1,4 @@
-# Install the kp9z skills
+# Install kFlows
 
 Use this instruction inside the target repository. The installing agent must
 have access to a local checkout of `kp9z/agent-skills` containing this file.
@@ -42,7 +42,11 @@ have access to a local checkout of `kp9z/agent-skills` containing this file.
    inspection uses available chat tools or explicitly supplied local exports.
    No audit implicitly authorizes mutations or publishing. Run its offline checks
    with `python3 -m unittest discover -s <skill-directory>/tests`.
-10. Validate that all listed skills are discoverable, their `SKILL.md` names match
+10. For `merge-to-local-main`, preserve its explicit-only invocation policy in
+   `agents/openai.yaml`. It requires Git and authenticated push access. Copy it
+   into the project skill directory by default; when requested across projects,
+   use `$CODEX_HOME/skills` or `~/.codex/skills` for Codex.
+11. Validate that all listed skills are discoverable, their `SKILL.md` names match
    their directory names, and every bundled reference resolves.
 
 At the end, report the bundle version, destination, installed or unchanged

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "name": "kp9z-skills",
+  "name": "kflows",
   "type": "skill-bundle",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "skills": [
     {
       "name": "plan-vertical-slices",
@@ -31,6 +31,10 @@
     {
       "name": "harness_improver",
       "path": "skills/harness_improver"
+    },
+    {
+      "name": "merge-to-local-main",
+      "path": "skills/merge-to-local-main"
     }
   ]
 }

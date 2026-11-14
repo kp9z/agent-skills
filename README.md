@@ -13,8 +13,7 @@ performing the installation.
 | --- | --- | --- |
 | `build-ios-apps` | Nine OpenAI iOS skills, testing, and Apple design review | [`bundles/build-ios-apps/INSTALL.md`](bundles/build-ios-apps/INSTALL.md) |
 | `core` | The pinned 13-skill engineering workflow | [`bundles/core/INSTALL.md`](bundles/core/INSTALL.md) |
-| `kp9z-skills` | Original planning, skill maintenance, and spec-to-ticket workflows | [`bundles/kp9z-skills/INSTALL.md`](bundles/kp9z-skills/INSTALL.md) |
-| `codex-essential` | Personal Codex workflow essentials | [`bundles/codex-essential/INSTALL.md`](bundles/codex-essential/INSTALL.md) |
+| `kflows` | Personal planning, implementation, maintenance, and merge workflows | [`bundles/kflows/INSTALL.md`](bundles/kflows/INSTALL.md) |
 | `destructive-command-hooks` | A shared destructive-command blocker with Codex and Claude Code adapters | [`bundles/destructive-command-hooks/INSTALL.md`](bundles/destructive-command-hooks/INSTALL.md) |
 
 ## How bundles work
@@ -86,7 +85,7 @@ instructions belong in the repository-root `AGENTS.md`. Run Hermes from that
 root so it loads the file. The destructive-command hook bundle currently has
 adapters only for Codex and Claude Code.
 
-### kp9z skills
+### kFlows
 
 The original skills are stored together without assuming a harness-specific
 installation directory. Each complete skill directory is copied as one unit.
@@ -118,18 +117,12 @@ installation directory. Each complete skill directory is copied as one unit.
   checks. It includes issue read/write, bounded history and test-result helpers,
   and runs only through explicit `$harness_improver` or `/harness_improver` invocation.
 
+- `merge-to-local-main` merges the current chat's verified work into `main`,
+  pushes the result, and keeps the chat open. It requires explicit invocation
+  via `/merge-to-local-main` or `$merge-to-local-main`.
+
 The underscore spellings of `to_ticket_yolo`, `push_to_testflight`, `ticket_marathon`,
 and `harness_improver` preserve their requested invocation names.
-
-### Codex Essential
-
-Codex Essential contains personal workflow skills that should remain available
-across projects. `continue-in-new-chat` distills the useful state of the current
-chat and continues the work in a clean Codex task. `i-dont-understand`
-re-explains difficult material in simpler language without discarding important
-accuracy. `merge-to-local-main` merges the current chat's work into `main`, pushes the result,
-and keeps the chat open after the merge succeeds. It requires explicit invocation
-via `/merge-to-local-main` or `$merge-to-local-main`.
 
 ### Destructive-command hooks
 
@@ -155,11 +148,7 @@ bundles/
 │   ├── manifest.json
 │   ├── LICENSE
 │   └── skills/
-├── kp9z-skills/
-│   ├── INSTALL.md
-│   ├── manifest.json
-│   └── skills/
-├── codex-essential/
+├── kflows/
 │   ├── INSTALL.md
 │   ├── manifest.json
 │   └── skills/
