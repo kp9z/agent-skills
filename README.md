@@ -81,9 +81,10 @@ directory is installed as one unit.
 - `ticket_marathon` keeps the main chat as an orchestrator: it checks dependencies,
   delegates each ticket to a new chat running the included `implement`, and waits for its
   result before selecting the next. It processes up to three tickets per batch,
-  then schedules continuation after 4 hours 30 minutes until the queue is empty or
+  then schedules continuation after 4 hours 30 minutes by default, or continues
+  immediately without automations when continuous mode is requested, until the queue is empty or
   intervention is required. It requires project tracker configuration and Codex app
-  chat and scheduling tools, and starts only through explicit
+  chat tools, plus scheduling tools in scheduled mode, and starts only through explicit
   `$ticket_marathon` or `/ticket_marathon` invocation.
 
 - `harness_improver` investigates the current chat and related workers for recurring
