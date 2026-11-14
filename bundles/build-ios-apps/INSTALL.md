@@ -1,7 +1,7 @@
 # Install Build iOS Apps
 
 This bundle preserves the complete upstream plugin and adds the local
-`ios-testing` and `ios-test-planner` skills. Read [manifest.json](manifest.json)
+`ios-testing`, `ios-test-planner`, `push_to_testflight`, and `apple-design` skills. Read [manifest.json](manifest.json)
 and [UPSTREAM.md](UPSTREAM.md) before installing.
 
 ## Check official updates before every installation
@@ -12,7 +12,7 @@ Original source: [OpenAI Build iOS Apps](https://github.com/openai/plugins/tree/
    `main` branch to an exact commit, then compare `plugins/build-ios-apps`
    at that commit with the bundled `source.commit`. Compare the directory's
    Git tree hash at both official commits, or the imported file hashes and
-   modes excluding both local skill additions, not just the plugin version
+   modes excluding all four additional skills, not just the plugin version
    or repository commit: unrelated repository changes are not plugin updates.
 2. If the plugin differs, summarize the changes and ask whether to install
    that exact official snapshot or the bundled snapshot. Do not silently
@@ -22,10 +22,10 @@ Original source: [OpenAI Build iOS Apps](https://github.com/openai/plugins/tree/
    from that snapshot's plugin manifest, preserve all references and script
    permissions, and follow the installation steps below using that snapshot.
    The bundled skill list describes the pinned snapshot plus local additions.
-   Always include both repository-owned skills (`ios-testing` and
-   `ios-test-planner`) from this bundle when installing either snapshot.
+   Always include the repository-owned skills (`ios-testing`,
+   `ios-test-planner`, and `push_to_testflight`) and the separately sourced `apple-design` skill from this bundle when installing either snapshot.
    Preserve them separately during refreshes.
-   If upstream introduces either name, report the collision and resolve
+   If upstream introduces any of these names, report the collision and resolve
    which version to install rather than silently overwriting either one.
 4. If the source cannot be checked, report the failure and ask whether to
    continue with the bundled snapshot. Never claim it is current without
@@ -45,10 +45,13 @@ Original source: [OpenAI Build iOS Apps](https://github.com/openai/plugins/tree/
    into the harness's supported MCP configuration. Preserve existing settings
    and resolve conflicting server entries before changing them. Copying skills
    alone does not register this server. Read each skill for its tool requirements.
-5. Verify skill discovery, names, bundled references, script permissions, and
+5. For `push_to_testflight`, preserve its explicit-only invocation flags and
+   install it only into the requested project’s skill directory. It requires a
+   configured production iOS CLI release workflow and Xcode signing access.
+6. Verify skill discovery, names, bundled references, script permissions, and
    required tool availability. Report the version, destinations, installed or
    unchanged skills, MCP changes, and any required session reload. Distinguish the
-   bundle version, official plugin version and commit, and local testing skills.
+   bundle version, official plugin version and commit, and additional testing, design, and release skills.
 
 Simulator, build, and profiling workflows require a Mac with Xcode and suitable
 Simulator runtimes. The MCP command requires Node.js and npx. Browser mirroring
@@ -59,5 +62,5 @@ For native plugin installation, use the complete bundle directory as the plugin
 root through the host's supported plugin installation workflow. Keep
 `.codex-plugin`, `.mcp.json`, `agents`, `assets`, and `skills` together. When
 installing a newer official snapshot as a plugin, include the local
-`ios-testing` and `ios-test-planner` directories in its `skills` directory
+`ios-testing`, `ios-test-planner`, `push_to_testflight`, and `apple-design` directories in its `skills` directory
 after resolving any collision.

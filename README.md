@@ -1,4 +1,4 @@
-# Agent Skills and Bundles
+# kFlows
 
 Reusable agent skills, engineering workflows, and lifecycle hooks. Every
 installable package has a manifest and an agent-facing installation
@@ -11,12 +11,8 @@ performing the installation.
 
 | Bundle | Purpose | Install instruction |
 | --- | --- | --- |
-| `build-ios-apps` | Nine OpenAI iOS skills plus test planning and execution | [`bundles/build-ios-apps/INSTALL.md`](bundles/build-ios-apps/INSTALL.md) |
-| `core` | The pinned 13-skill engineering workflow | [`bundles/core/INSTALL.md`](bundles/core/INSTALL.md) |
-| `plus` | Core plus Wayfinder, Research, and Prototype | [`bundles/plus/INSTALL.md`](bundles/plus/INSTALL.md) |
-| `grill-me-supplements` | Named, opt-in skills that complement `grill-me` | [`bundles/grill-me-supplements/INSTALL.md`](bundles/grill-me-supplements/INSTALL.md) |
-| `kp9z-skills` | Original planning, skill maintenance, and spec-to-ticket workflows | [`bundles/kp9z-skills/INSTALL.md`](bundles/kp9z-skills/INSTALL.md) |
-| `codex-essential` | Personal Codex workflow essentials | [`bundles/codex-essential/INSTALL.md`](bundles/codex-essential/INSTALL.md) |
+| `build-ios-apps` | Nine OpenAI iOS skills, testing, design review, and TestFlight upload | [`bundles/build-ios-apps/INSTALL.md`](bundles/build-ios-apps/INSTALL.md) |
+| `kflows` | GitHub setup, triage, planning, implementation, review, and personal workflows | [`bundles/kflows/INSTALL.md`](bundles/kflows/INSTALL.md) |
 | `destructive-command-hooks` | A shared destructive-command blocker with Codex and Claude Code adapters | [`bundles/destructive-command-hooks/INSTALL.md`](bundles/destructive-command-hooks/INSTALL.md) |
 
 ## How bundles work
@@ -46,95 +42,51 @@ and memory leak investigation. The local `ios-testing` skill adds Swift Testing,
 XCTest, and XCUITest workflows. `ios-test-planner` inspects the codebase and
 available APIs, proposes scenarios and setup for user approval, then hands
 approved scenarios to `ios-testing` for implementation and the first run. Both
-local skills remain included when upstream is refreshed.
+local skills remain included when upstream is refreshed. The bundled
+`apple-design` skill adds HIG-based design review and is also preserved on refresh.
 Installation and source details are in
 [`bundles/build-ios-apps/INSTALL.md`](bundles/build-ios-apps/INSTALL.md) and
 [`bundles/build-ios-apps/UPSTREAM.md`](bundles/build-ios-apps/UPSTREAM.md).
-
-### Core
-
-The bundle contains exactly these 13 skills:
-
-- `setup-matt-pocock-skills`
-- `triage`
-- `grill-me`
-- `grilling`
-- `improve-codebase-architecture`
-- `codebase-design`
-- `domain-modeling`
-- `writing-for-agents`
-- `to-spec`
-- `to-tickets`
-- `tdd`
-- `implement`
-- `code-review`
-
-The bundled snapshot is pinned to an upstream release. Before every new
-installation, the agent checks the upstream release tags. If a newer stable
-release exists, the agent asks whether to install that exact release or use the
-bundled snapshot.
-
-Project-specific files such as `AGENTS.md`, `CLAUDE.md`, and `docs/agents/*`
-are generated during setup. They are not stored as generic templates in this
-repository.
-
-[`bundles/core/SETUP.md`](bundles/core/SETUP.md) records the recommended
-repository defaults for an installing agent. It supplies answers to the setup
-workflow without changing the bundled setup skill itself.
-
-For Hermes Agent, skills install under `~/.hermes/skills` and portable project
-instructions belong in the repository-root `AGENTS.md`. Run Hermes from that
-root so it loads the file. The destructive-command hook bundle currently has
-adapters only for Codex and Claude Code.
-
-### Plus
-
-Plus composes the entire Core bundle with three additional skills:
-
-- `wayfinder`
-- `research`
-- `prototype`
-
-`wayfinder` maps a large, uncertain effort into decision tickets. Its
-`research` and `prototype` dependencies are included so every Wayfinder ticket
-type works.
-
-### Grill-me supplements
-
-Supplements complement `grill-me` while remaining independently installable.
-The installer copies only supplement names explicitly supplied by the user.
-Each supplement keeps its own upstream metadata when it comes from a different
-source.
-
-- `teach` provides a stateful, multi-session learning workspace.
-- `show-me` explains the current topic with concise diagrams, code-shape
-  sketches, and focused HTML artifacts.
-
-### kp9z skills
-
-The original skills are stored together without assuming a harness-specific
-installation directory. Each complete skill directory is copied as one unit.
-
-- `plan-vertical-slices` plans runnable, verifiable software milestones.
-- `skill-maintenance` audits skill collections and their context pointers.
-- `grill-me-in-batch` sharpens multiple features in one chat, tracking shared
-  decisions and dependencies. It requires Core’s `grilling` skill and runs only
-  through explicit `$grill-me-in-batch` or `/grill-me-in-batch` invocation.
-- `to_ticket_yolo` runs Core's `to-spec` then `to-tickets`, publishing a spec and
-  linked issues without approval pauses. It requires those two skills and project
-  tracker configuration, and runs only when explicitly invoked as
-  `$to_ticket_yolo` or `/to_ticket_yolo`.
 
 - `push_to_testflight` archives and uploads the current production iOS app through
   its configured CLI workflow. It runs only as `$push_to_testflight` or
   `/push_to_testflight`, preserves the app version, and ends after upload.
 
+### kFlows
+
+kFlows combines the personal workflows with the engineering skills from the
+existing Matt Pocock v1.3.2 installation. Source metadata is recorded per skill
+in the manifest, and the upstream MIT license is preserved. Each complete skill
+directory is installed as one unit. Codex installs kFlows at user level in
+`~/.agents/skills`; each project keeps its own `AGENTS.md`, GitHub tracker
+configuration, label mapping, and domain rules. The iOS bundle stays project-local.
+
+- `setup-kflows` configures GitHub Issues, canonical labels, and the root
+  `AGENTS.md`. Its `$setup-kflows triage` mode handles issue triage using bundled
+  brief and rejection references; no separate `triage` skill is installed.
+- `grill-me` and `grilling` sharpen a plan or design through an interview.
+- `to-spec` and `to-tickets` publish an agreed specification and linked tickets.
+- `implement`, `tdd`, and `code-review` implement and verify the agreed work.
+- `codebase-design` and `improve-codebase-architecture` guide module design
+  and architectural improvements.
+- `domain-modeling` maintains `GLOSSARY.md` and architectural decisions.
+- `writing-for-agents` guides skill and project instruction authoring.
+
+- `grill-me-in-batch` sharpens multiple features in one chat, tracking shared
+  decisions and dependencies. It requires the included `grilling` skill and runs only
+  through explicit `$grill-me-in-batch` or `/grill-me-in-batch` invocation.
+- `to_ticket_yolo` runs the included `to-spec` then `to-tickets`, publishing a spec and
+  linked issues without approval pauses. It requires those two skills and project
+  tracker configuration, and runs only when explicitly invoked as
+  `$to_ticket_yolo` or `/to_ticket_yolo`.
+
 - `ticket_marathon` keeps the main chat as an orchestrator: it checks dependencies,
-  delegates each ticket to a new chat running Core's `implement`, and waits for its
+  delegates each ticket to a new chat running the included `implement`, and waits for its
   result before selecting the next. It processes up to three tickets per batch,
-  then schedules continuation after 4 hours 30 minutes until the queue is empty or
+  then schedules continuation after 4 hours 30 minutes by default, or continues
+  immediately without automations when continuous mode is requested, until the queue is empty or
   intervention is required. It requires project tracker configuration and Codex app
-  chat and scheduling tools, and starts only through explicit
+  chat tools, plus scheduling tools in scheduled mode, and starts only through explicit
   `$ticket_marathon` or `/ticket_marathon` invocation.
 
 - `harness_improver` investigates the current chat and related workers for recurring
@@ -142,18 +94,16 @@ installation directory. Each complete skill directory is copied as one unit.
   checks. It includes issue read/write, bounded history and test-result helpers,
   and runs only through explicit `$harness_improver` or `/harness_improver` invocation.
 
-The underscore spellings of `to_ticket_yolo`, `push_to_testflight`, `ticket_marathon`,
-and `harness_improver` preserve their requested invocation names.
+- `sync_skills` compares installed skills with the collection and publishes newer
+  local versions through a review branch and PR. It runs only as `$sync_skills`
+  or `/sync_skills`, with optional skill names to narrow the scope.
 
-### Codex Essential
+- `merge-to-local-main` merges the current chat's verified work into `main`,
+  pushes the result, and keeps the chat open. It requires explicit invocation
+  via `/merge-to-local-main` or `$merge-to-local-main`.
 
-Codex Essential contains personal workflow skills that should remain available
-across projects. `continue-in-new-chat` distills the useful state of the current
-chat and continues the work in a clean Codex task. `i-dont-understand`
-re-explains difficult material in simpler language without discarding important
-accuracy. `merge-to-local-main` merges the current chat's work into `main`, pushes the result,
-and keeps the chat open after the merge succeeds. It requires explicit invocation
-via `/merge-to-local-main` or `$merge-to-local-main`.
+The underscore spellings of `to_ticket_yolo`, `ticket_marathon`,
+`harness_improver`, and `sync_skills` preserve their requested invocation names.
 
 ### Destructive-command hooks
 
@@ -174,26 +124,7 @@ bundles/
 │   ├── agents/
 │   ├── assets/
 │   └── skills/
-├── core/
-│   ├── INSTALL.md
-│   ├── manifest.json
-│   ├── LICENSE
-│   └── skills/
-├── plus/
-│   ├── INSTALL.md
-│   ├── manifest.json
-│   ├── LICENSE
-│   └── skills/
-├── grill-me-supplements/
-│   ├── INSTALL.md
-│   ├── manifest.json
-│   ├── LICENSE
-│   └── skills/
-├── kp9z-skills/
-│   ├── INSTALL.md
-│   ├── manifest.json
-│   └── skills/
-├── codex-essential/
+├── kflows/
 │   ├── INSTALL.md
 │   ├── manifest.json
 │   └── skills/
