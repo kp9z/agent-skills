@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "kflows",
   "type": "skill-bundle",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "skills": [
     {
       "name": "to_ticket_yolo",
@@ -151,6 +151,10 @@
     {
       "name": "sync_skills",
       "path": "skills/sync_skills"
+    },
+    {
+      "name": "improve-test-quality",
+      "path": "skills/improve-test-quality"
     }
   ]
 }

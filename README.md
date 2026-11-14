@@ -67,6 +67,9 @@ configuration, label mapping, and domain rules. The iOS bundle stays project-loc
 - `grill-me` and `grilling` sharpen a plan or design through an interview.
 - `to-spec` and `to-tickets` publish an agreed specification and linked tickets.
 - `implement`, `tdd`, and `code-review` implement and verify the agreed work.
+- `improve-test-quality` audits and improves existing suites by pruning proven
+  redundancy, strengthening assertions, and reducing setup and waiting while
+  preserving meaningful regression coverage.
 - `codebase-design` and `improve-codebase-architecture` guide module design
   and architectural improvements.
 - `domain-modeling` maintains `GLOSSARY.md` and architectural decisions.
