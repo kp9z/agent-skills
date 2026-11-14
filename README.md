@@ -11,10 +11,8 @@ performing the installation.
 
 | Bundle | Purpose | Install instruction |
 | --- | --- | --- |
-| `build-ios-apps` | Nine OpenAI iOS skills plus test planning and execution | [`bundles/build-ios-apps/INSTALL.md`](bundles/build-ios-apps/INSTALL.md) |
+| `build-ios-apps` | Nine OpenAI iOS skills, testing, and Apple design review | [`bundles/build-ios-apps/INSTALL.md`](bundles/build-ios-apps/INSTALL.md) |
 | `core` | The pinned 13-skill engineering workflow | [`bundles/core/INSTALL.md`](bundles/core/INSTALL.md) |
-| `plus` | Core plus Wayfinder, Research, and Prototype | [`bundles/plus/INSTALL.md`](bundles/plus/INSTALL.md) |
-| `grill-me-supplements` | Named, opt-in skills that complement `grill-me` | [`bundles/grill-me-supplements/INSTALL.md`](bundles/grill-me-supplements/INSTALL.md) |
 | `kp9z-skills` | Original planning, skill maintenance, and spec-to-ticket workflows | [`bundles/kp9z-skills/INSTALL.md`](bundles/kp9z-skills/INSTALL.md) |
 | `codex-essential` | Personal Codex workflow essentials | [`bundles/codex-essential/INSTALL.md`](bundles/codex-essential/INSTALL.md) |
 | `destructive-command-hooks` | A shared destructive-command blocker with Codex and Claude Code adapters | [`bundles/destructive-command-hooks/INSTALL.md`](bundles/destructive-command-hooks/INSTALL.md) |
@@ -46,7 +44,8 @@ and memory leak investigation. The local `ios-testing` skill adds Swift Testing,
 XCTest, and XCUITest workflows. `ios-test-planner` inspects the codebase and
 available APIs, proposes scenarios and setup for user approval, then hands
 approved scenarios to `ios-testing` for implementation and the first run. Both
-local skills remain included when upstream is refreshed.
+local skills remain included when upstream is refreshed. The bundled
+`apple-design` skill adds HIG-based design review and is also preserved on refresh.
 Installation and source details are in
 [`bundles/build-ios-apps/INSTALL.md`](bundles/build-ios-apps/INSTALL.md) and
 [`bundles/build-ios-apps/UPSTREAM.md`](bundles/build-ios-apps/UPSTREAM.md).
@@ -86,29 +85,6 @@ For Hermes Agent, skills install under `~/.hermes/skills` and portable project
 instructions belong in the repository-root `AGENTS.md`. Run Hermes from that
 root so it loads the file. The destructive-command hook bundle currently has
 adapters only for Codex and Claude Code.
-
-### Plus
-
-Plus composes the entire Core bundle with three additional skills:
-
-- `wayfinder`
-- `research`
-- `prototype`
-
-`wayfinder` maps a large, uncertain effort into decision tickets. Its
-`research` and `prototype` dependencies are included so every Wayfinder ticket
-type works.
-
-### Grill-me supplements
-
-Supplements complement `grill-me` while remaining independently installable.
-The installer copies only supplement names explicitly supplied by the user.
-Each supplement keeps its own upstream metadata when it comes from a different
-source.
-
-- `teach` provides a stateful, multi-session learning workspace.
-- `show-me` explains the current topic with concise diagrams, code-shape
-  sketches, and focused HTML artifacts.
 
 ### kp9z skills
 
@@ -175,16 +151,6 @@ bundles/
 │   ├── assets/
 │   └── skills/
 ├── core/
-│   ├── INSTALL.md
-│   ├── manifest.json
-│   ├── LICENSE
-│   └── skills/
-├── plus/
-│   ├── INSTALL.md
-│   ├── manifest.json
-│   ├── LICENSE
-│   └── skills/
-├── grill-me-supplements/
 │   ├── INSTALL.md
 │   ├── manifest.json
 │   ├── LICENSE
