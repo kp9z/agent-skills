@@ -4,7 +4,7 @@ description: A batch interview to sharpen multiple features, plans, or ideas in 
 disable-model-invocation: true
 ---
 
-Read the installed `grilling` skill (normally `../grilling/SKILL.md`; in this source repository, use [Core’s grilling workflow](../../../core/skills/grilling/SKILL.md)) and apply its interview rules with the following batch behavior. These instructions replace its single design tree and session completion criteria.
+Read the included [grilling workflow](../grilling/SKILL.md) and apply its interview rules with the following batch behavior. These instructions replace its single design tree and session completion criteria.
 
 ## Establish the batch
 

@@ -1,4 +1,4 @@
-# Agent Skills and Bundles
+# kFlows
 
 Reusable agent skills, engineering workflows, and lifecycle hooks. Every
 installable package has a manifest and an agent-facing installation
@@ -12,8 +12,7 @@ performing the installation.
 | Bundle | Purpose | Install instruction |
 | --- | --- | --- |
 | `build-ios-apps` | Nine OpenAI iOS skills, testing, design review, and TestFlight upload | [`bundles/build-ios-apps/INSTALL.md`](bundles/build-ios-apps/INSTALL.md) |
-| `core` | The pinned 13-skill engineering workflow | [`bundles/core/INSTALL.md`](bundles/core/INSTALL.md) |
-| `kflows` | Personal planning, implementation, maintenance, and merge workflows | [`bundles/kflows/INSTALL.md`](bundles/kflows/INSTALL.md) |
+| `kflows` | GitHub setup, triage, planning, implementation, review, and personal workflows | [`bundles/kflows/INSTALL.md`](bundles/kflows/INSTALL.md) |
 | `destructive-command-hooks` | A shared destructive-command blocker with Codex and Claude Code adapters | [`bundles/destructive-command-hooks/INSTALL.md`](bundles/destructive-command-hooks/INSTALL.md) |
 
 ## How bundles work
@@ -53,57 +52,34 @@ Installation and source details are in
   its configured CLI workflow. It runs only as `$push_to_testflight` or
   `/push_to_testflight`, preserves the app version, and ends after upload.
 
-### Core
-
-The bundle contains exactly these 13 skills:
-
-- `setup-matt-pocock-skills`
-- `triage`
-- `grill-me`
-- `grilling`
-- `improve-codebase-architecture`
-- `codebase-design`
-- `domain-modeling`
-- `writing-for-agents`
-- `to-spec`
-- `to-tickets`
-- `tdd`
-- `implement`
-- `code-review`
-
-The bundled snapshot is pinned to an upstream release. Before every new
-installation, the agent checks the upstream release tags. If a newer stable
-release exists, the agent asks whether to install that exact release or use the
-bundled snapshot.
-
-Project-specific files such as `AGENTS.md`, `CLAUDE.md`, and `docs/agents/*`
-are generated during setup. They are not stored as generic templates in this
-repository.
-
-[`bundles/core/SETUP.md`](bundles/core/SETUP.md) records the recommended
-repository defaults for an installing agent. It supplies answers to the setup
-workflow without changing the bundled setup skill itself.
-
-For Hermes Agent, skills install under `~/.hermes/skills` and portable project
-instructions belong in the repository-root `AGENTS.md`. Run Hermes from that
-root so it loads the file. The destructive-command hook bundle currently has
-adapters only for Codex and Claude Code.
-
 ### kFlows
 
-The original skills are stored together without assuming a harness-specific
-installation directory. Each complete skill directory is copied as one unit.
+kFlows combines the personal workflows with the engineering skills from the
+existing Matt Pocock v1.3.2 installation. Source metadata is recorded per skill
+in the manifest, and the upstream MIT license is preserved. Each complete skill
+directory is installed as one unit.
+
+- `setup-kflows` configures GitHub Issues, canonical labels, and the root
+  `AGENTS.md`. Its `$setup-kflows triage` mode handles issue triage using bundled
+  brief and rejection references; no separate `triage` skill is installed.
+- `grill-me` and `grilling` sharpen a plan or design through an interview.
+- `to-spec` and `to-tickets` publish an agreed specification and linked tickets.
+- `implement`, `tdd`, and `code-review` implement and verify the agreed work.
+- `codebase-design` and `improve-codebase-architecture` guide module design
+  and architectural improvements.
+- `domain-modeling` maintains `GLOSSARY.md` and architectural decisions.
+- `writing-for-agents` guides skill and project instruction authoring.
 
 - `grill-me-in-batch` sharpens multiple features in one chat, tracking shared
-  decisions and dependencies. It requires Core’s `grilling` skill and runs only
+  decisions and dependencies. It requires the included `grilling` skill and runs only
   through explicit `$grill-me-in-batch` or `/grill-me-in-batch` invocation.
-- `to_ticket_yolo` runs Core's `to-spec` then `to-tickets`, publishing a spec and
+- `to_ticket_yolo` runs the included `to-spec` then `to-tickets`, publishing a spec and
   linked issues without approval pauses. It requires those two skills and project
   tracker configuration, and runs only when explicitly invoked as
   `$to_ticket_yolo` or `/to_ticket_yolo`.
 
 - `ticket_marathon` keeps the main chat as an orchestrator: it checks dependencies,
-  delegates each ticket to a new chat running Core's `implement`, and waits for its
+  delegates each ticket to a new chat running the included `implement`, and waits for its
   result before selecting the next. It processes up to three tickets per batch,
   then schedules continuation after 4 hours 30 minutes until the queue is empty or
   intervention is required. It requires project tracker configuration and Codex app
@@ -140,11 +116,6 @@ bundles/
 │   ├── .mcp.json
 │   ├── agents/
 │   ├── assets/
-│   └── skills/
-├── core/
-│   ├── INSTALL.md
-│   ├── manifest.json
-│   ├── LICENSE
 │   └── skills/
 ├── kflows/
 │   ├── INSTALL.md

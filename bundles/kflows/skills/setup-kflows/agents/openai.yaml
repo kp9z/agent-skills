@@ -1,0 +1,6 @@
+interface:
+  display_name: "Setup kFlows"
+  short_description: "Set up GitHub Issues and triage for kFlows"
+  default_prompt: "Use $setup-kflows to configure this repository for kFlows."
+policy:
+  allow_implicit_invocation: false
