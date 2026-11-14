@@ -1,0 +1,7 @@
+interface:
+  display_name: "Merge to Local Main"
+  short_description: "Merge into local main and push to remote"
+  default_prompt: "Use $merge-to-local-main to merge this chat's work into local main, push it, and keep this chat open."
+
+policy:
+  allow_implicit_invocation: false

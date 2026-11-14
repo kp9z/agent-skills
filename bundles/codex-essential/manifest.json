@@ -13,8 +13,8 @@
       "path": "skills/i-dont-understand"
     },
     {
-      "name": "merge_and_archive",
-      "path": "skills/merge_and_archive"
+      "name": "merge-to-local-main",
+      "path": "skills/merge-to-local-main"
     }
   ]
 }

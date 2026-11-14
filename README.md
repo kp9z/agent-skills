@@ -151,9 +151,9 @@ Codex Essential contains personal workflow skills that should remain available
 across projects. `continue-in-new-chat` distills the useful state of the current
 chat and continues the work in a clean Codex task. `i-dont-understand`
 re-explains difficult material in simpler language without discarding important
-accuracy. `merge_and_archive` merges the current chat's work into `main`, pushes the result,
-and archives the chat after the merge succeeds. It requires explicit invocation
-via `/merge_and_archive` or `$merge_and_archive`.
+accuracy. `merge-to-local-main` merges the current chat's work into `main`, pushes the result,
+and keeps the chat open after the merge succeeds. It requires explicit invocation
+via `/merge-to-local-main` or `$merge-to-local-main`.
 
 ### Destructive-command hooks
 
