@@ -40,10 +40,11 @@ it with upstream files would discard the kFlows setup and triage customizations.
 7. `merge-to-local-main` needs Git and authenticated push access. Install it with
    the other user-level kFlows skills; its Git commands operate in the target
    project checkout, not the installation directory.
-8. `sync_skills` needs read access to installed skills and authenticated push/PR
+8. `sync_skills` needs read access to installed skills and authenticated push
    access to `kp9z/agent-skills`. Preserve its explicit-only invocation policy.
-   It publishes local updates through a review branch, without merging or
-   modifying installations.
+   It publishes verified local updates directly to the default branch without a
+   PR by default; an explicitly requested review workflow takes precedence. It
+   leaves installations unchanged.
 9. Verify all manifest skills are discoverable, their names match their folders,
    bundled references resolve, generated project links resolve, and `AGENTS.md`
    contains one Agent skills section. Record the collection repository URL, source

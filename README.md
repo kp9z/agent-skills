@@ -97,7 +97,8 @@ configuration, label mapping, and domain rules. The iOS bundle stays project-loc
   and runs only through explicit `$harness_improver` or `/harness_improver` invocation.
 
 - `sync_skills` compares installed skills with the collection and publishes newer
-  local versions through a review branch and PR. It runs only as `$sync_skills`
+  local versions directly to the default branch without a PR, unless a review
+  workflow is explicitly requested. It runs only as `$sync_skills`
   or `/sync_skills`, with optional skill names to narrow the scope.
 
 - `merge-to-local-main` merges the current chat's verified work into `main`,

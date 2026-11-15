@@ -8,8 +8,9 @@ disable-model-invocation: true
 
 Run only on explicit `$sync_skills` or `/sync_skills` invocation. This authorizes
 comparing installed skills and publishing supported local updates to
-[the skill collection](https://github.com/kp9z/agent-skills) on a review branch
-and pull request. It does not authorize merging the PR or updating installations.
+[the skill collection](https://github.com/kp9z/agent-skills) directly to its
+default branch without a pull request or an extra approval pause. It does not authorize updating installations. Honor an explicitly requested
+review branch or PR workflow instead when supplied.
 
 ## Scope and source
 
@@ -55,7 +56,10 @@ Keep the target project checkout and all installed skills unchanged.
 
 ## Prepare and publish
 
-5. Copy only selected skill changes into a clean `codex/` branch of the collection.
+5. Copy only selected skill changes into a clean isolated checkout based on the
+   collection's current default branch. A local `codex/` working branch may be used;
+   publish its verified commit directly to the default branch unless the user
+   explicitly selected a review branch or PR workflow.
    Keep complete directories together. Reflect intentional file removals inside
    an updated skill when the baseline establishes them. Resolve dependencies on
    external shared helpers by including the required portable resources or
@@ -70,13 +74,16 @@ Keep the target project checkout and all installed skills unchanged.
    scripts and meaningful behavior; inspect the staged diff for unrelated files
    and local-only data. Commit a focused change.
 8. Fetch the target branch again before publishing. If it advanced, reconcile
-   against its new contents and repeat affected validation. Push the review
-   branch without force and create or update a PR describing the actual updates
-   and checks. An existing PR may be reused only when selected by the user or
-   established by the active session. Verify the remote commit and PR result.
-   On an uncertain write result, inspect remote state before retrying.
+   against its new contents and repeat affected validation. Push the verified
+   commit directly to the default branch without force; create no PR by default.
+   If branch protection requires a PR, report that requirement rather than
+   bypassing it. When the user explicitly selected a review workflow, push its
+   branch and create or update the selected PR instead. Verify the remote branch
+   commit and any requested PR result. On an uncertain write result, inspect
+   remote state before retrying.
 
-If no supported update exists, report a no-op without creating a commit or PR.
+If no supported update exists, report a no-op without creating a commit.
 If access or validation fails, report the blocker and any already-published
-branch/PR; leave the user's local installations intact. Finish with the source
-paths, updated skills, unresolved differences, checks, commit, and PR link.
+commit, branch or PR; leave the user's local installations intact. Finish with
+the source paths, updated skills, unresolved differences, checks, and remote
+commit link (plus the PR link when explicitly requested).
