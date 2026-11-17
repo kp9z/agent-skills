@@ -32,6 +32,16 @@ independent work that could overlap its resumption.
 2. Honor an explicitly supplied ticket list, parent spec, or filter. Otherwise use all open implementation tickets labeled `ready-for-agent`. Fetch every results page. Exclude parent specs, tracking-only issues, and tickets marked `needs-triage`, `needs-info`, `ready-for-human`, or `wontfix`. Preserve this scope across continuations; new tickets qualify only if they match the original scope. Dependencies outside that scope are constraints, not permission to expand it.
 3. Record the repository path, current branch, queue scope, continuation mode, and any existing marathon continuation ID in the chat. Inspect working-tree changes and preserve unrelated work. Resume on the recorded branch; if it has changed unexpectedly or another marathon run is active for this checkout, stop for reconciliation before dispatching work. Preserve each dispatched ticket's worker chat ID, host ID, wait cursor, current phase, checkout, branch, pending action, and reserved shared resources across continuations so an existing worker is monitored rather than duplicated.
 
+## Ownership contract
+
+Before dispatch or existing-worker resumption, read and execute the installed
+[ownership integration](references/ownership.md). Prepare ownership before chat
+creation, attach the returned chat identity before worker operations, and resume
+through that boundary using the current cursor and authorization reference. Carry
+the shared registry and ownership credentials into worker prompts/continuations.
+Deferral retains claims; shared-resource handoff requires explicit current-owner
+release. Stop affected operations on disagreement and follow reviewed recovery.
+
 ## Run one batch
 
 Dispatch at most **three distinct tickets per batch**, strictly one at a time. Select the next ticket after the current worker completes or is safely deferred under **Blocked workers and isolation** below.

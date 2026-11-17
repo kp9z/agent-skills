@@ -43,6 +43,24 @@ python3 scripts/test_results.py /path/to/run.json --log /path/to/test.log --limi
 python3 scripts/test_results.py --log /path/to/test.log
 ```
 
-Understands the SkinSense-style runner receipt (`selected`, `executed`, `summary`, `status`, `exitCode`) and extracts bounded compiler/assertion/runner errors from a log, defaulting to `test.log` beside a receipt. It verifies nonempty execution, selection agreement and failures/skips when receipt evidence is complete. Incomplete receipts and log-only input are unverified; a successful build or absence of matched error lines is not a passing test result. It does not execute tests, repair assertions, classify a failure as pre-existing, or retry runners. Extend adapters when another runner's concrete schema is needed.
+Inspects execution and comparable before/after source identities, retaining concurrent
+failure reasons with bounded receipt/line references. Read [receipt diagnostics](test-result-diagnostics.md)
+for supported fields, source/legacy limits, safe output caps, recovery and the
+explicit global/adapter synchronization procedure. Runner and completion summaries
+consume this same inspector; raw receipts stay authoritative.
 
 Run helper checks with `python3 -m unittest discover -s tests`.
+
+## Resource ownership
+
+Use the standalone `scripts/ownership.py` contract for participating local workers,
+without invoking the audit skill. Read [ownership operations](ownership.md) for
+claim/release/reconcile JSON, shared registry discovery, installation, migration,
+interrupted-write recovery and cooperative limits. Marathon dispatch/resume uses
+the installed sibling `ticket_marathon/scripts/runner.py`.
+
+## Fixed source snapshots
+
+Use standalone `scripts/snapshot.py` for opt-in fixed verification, checked integration
+provenance and protected evidence lifecycle. Read [snapshot operations](snapshots.md)
+for explicit revision/baseline/input selection, ownership transfer and recovery.

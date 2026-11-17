@@ -239,7 +239,8 @@ class ResultTests(unittest.TestCase):
             log.write_text("a.swift:12:3: error: " + "x" * 2000 + "\n" + "a.swift:14:4: error: another\n")
             result = results.inspect(log=log, limit=1, chars=80)
             self.assertEqual(result["failure_kind"], "compiler")
-            self.assertEqual(len(result["errors"][0]["text"]), 80)
+            self.assertLessEqual(len(result["errors"][0]["text"]), 80)
+            self.assertTrue(result["errors"][0]["content_omitted"])
             self.assertEqual(result["additional_error_lines"], 1)
 
 

@@ -1,0 +1,1205 @@
+[
+  {
+    "name": "clean",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "passed",
+      "failure_reasons": [],
+      "source_state": "matching"
+    }
+  },
+  {
+    "name": "stale-four-pass",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "2222222222222222222222222222222222222222222222222222222222222222",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "failed",
+      "exitCode": 1,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "not_passed",
+      "failure_reasons": [
+        "source_changed",
+        "runner_or_unclassified"
+      ],
+      "source_state": "changed"
+    }
+  },
+  {
+    "name": "forged-success",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "2222222222222222222222222222222222222222222222222222222222222222",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "not_passed",
+      "failure_reasons": [
+        "source_changed"
+      ],
+      "source_state": "changed"
+    }
+  },
+  {
+    "name": "legacy-execution-only",
+    "receipt": {
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "passed",
+      "failure_reasons": [],
+      "source_state": "unknown"
+    }
+  },
+  {
+    "name": "one-identity-missing",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "unverified",
+      "failure_reasons": [],
+      "source_state": "unknown"
+    }
+  },
+  {
+    "name": "malformed-identity",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "changed",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "unverified",
+      "failure_reasons": [],
+      "source_state": "invalid"
+    }
+  },
+  {
+    "name": "incomparable-checkout",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/elsewhere",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "unverified",
+      "failure_reasons": [],
+      "source_state": "unknown"
+    }
+  },
+  {
+    "name": "incomparable-baseline",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "unverified",
+      "failure_reasons": [],
+      "source_state": "unknown"
+    }
+  },
+  {
+    "name": "incomparable-algorithm",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "future",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "unverified",
+      "failure_reasons": [],
+      "source_state": "unknown"
+    }
+  },
+  {
+    "name": "incomparable-excluded",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "unverified",
+      "failure_reasons": [],
+      "source_state": "unknown"
+    }
+  },
+  {
+    "name": "incomparable-installed",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": [
+          {
+            "path": "/helper",
+            "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+          }
+        ]
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "unverified",
+      "failure_reasons": [],
+      "source_state": "unknown"
+    }
+  },
+  {
+    "name": "revision-changed-same-bytes",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "passed",
+      "failure_reasons": [],
+      "source_state": "matching"
+    }
+  },
+  {
+    "name": "assertion",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 1,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "not_passed",
+      "failure_reasons": [
+        "test_assertion"
+      ],
+      "source_state": "matching"
+    }
+  },
+  {
+    "name": "assertion-log",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": "XCTAssertTrue failed - secret\n",
+    "expected": {
+      "verification": "not_passed",
+      "failure_reasons": [
+        "test_assertion"
+      ],
+      "source_state": "matching"
+    }
+  },
+  {
+    "name": "compiler",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": "a.swift:12:3: error: secret\n",
+    "expected": {
+      "verification": "not_passed",
+      "failure_reasons": [
+        "compiler"
+      ],
+      "source_state": "matching"
+    }
+  },
+  {
+    "name": "runner",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 65,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "not_passed",
+      "failure_reasons": [
+        "runner_or_unclassified"
+      ],
+      "source_state": "matching"
+    }
+  },
+  {
+    "name": "zero",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "not_passed",
+      "failure_reasons": [
+        "execution_mismatch"
+      ],
+      "source_state": "matching"
+    }
+  },
+  {
+    "name": "missing",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "not_passed",
+      "failure_reasons": [
+        "execution_mismatch"
+      ],
+      "source_state": "matching"
+    }
+  },
+  {
+    "name": "unexpected",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "extra"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "not_passed",
+      "failure_reasons": [
+        "execution_mismatch"
+      ],
+      "source_state": "matching"
+    }
+  },
+  {
+    "name": "skipped",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": 0,
+        "skippedTests": 1
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "not_passed",
+      "failure_reasons": [
+        "execution_mismatch"
+      ],
+      "source_state": "matching"
+    }
+  },
+  {
+    "name": "incomplete",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0
+    },
+    "log": null,
+    "expected": {
+      "verification": "unverified",
+      "failure_reasons": [
+        "receipt_invalid"
+      ],
+      "source_state": "matching"
+    }
+  },
+  {
+    "name": "invalid-count",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "summary": {
+        "failedTests": "bad",
+        "skippedTests": 0
+      }
+    },
+    "log": null,
+    "expected": {
+      "verification": "unverified",
+      "failure_reasons": [
+        "receipt_invalid"
+      ],
+      "source_state": "matching"
+    }
+  },
+  {
+    "name": "successful-build",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "status": "passed",
+      "exitCode": 0
+    },
+    "log": "BUILD SUCCEEDED\n",
+    "expected": {
+      "verification": "unverified",
+      "failure_reasons": [
+        "receipt_invalid"
+      ],
+      "source_state": "matching"
+    }
+  },
+  {
+    "name": "mixed",
+    "receipt": {
+      "source": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "sourceAfter": {
+        "checkout": "/fixture/checkout",
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "algorithm": "git-working-bytes-v1",
+        "fingerprint": "2222222222222222222222222222222222222222222222222222222222222222",
+        "excluded": [
+          "build"
+        ],
+        "installed": []
+      },
+      "selected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "executed": [
+        "a"
+      ],
+      "status": "passed",
+      "exitCode": 65,
+      "summary": {
+        "failedTests": 1,
+        "skippedTests": 1
+      }
+    },
+    "log": "a.swift:12:1: error: secret\n",
+    "expected": {
+      "verification": "not_passed",
+      "failure_reasons": [
+        "source_changed",
+        "compiler",
+        "test_assertion",
+        "execution_mismatch",
+        "runner_or_unclassified"
+      ],
+      "source_state": "changed"
+    }
+  }
+]

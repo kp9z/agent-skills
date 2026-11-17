@@ -70,6 +70,8 @@ configuration, label mapping, and domain rules. The iOS bundle stays project-loc
 - `codebase-design` and `improve-codebase-architecture` guide module design
   and architectural improvements.
 - `domain-modeling` maintains `GLOSSARY.md` and architectural decisions.
+- `improve-test-quality` audits and improves regression protection and feedback time,
+  including behavior-to-test mapping and brief repository agent guidance when useful.
 - `writing-for-agents` guides skill and project instruction authoring.
 
 - `grill-me-in-batch` sharpens multiple features in one chat, tracking shared
