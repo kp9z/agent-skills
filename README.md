@@ -65,6 +65,9 @@ configuration, label mapping, and domain rules. The iOS bundle stays project-loc
   `AGENTS.md`. Its `$setup-kflows triage` mode handles issue triage using bundled
   brief and rejection references; no separate `triage` skill is installed.
 - `grill-me` and `grilling` sharpen a plan or design through an interview.
+- `$grill-with-docs` uses `grilling` and `domain-modeling` to sharpen a design
+  and record agreed terminology and qualifying decisions in `GLOSSARY.md` and
+  `docs/adr/`.
 - `to-spec` and `to-tickets` publish an agreed specification and linked tickets.
 - `implement`, `tdd`, and `code-review` implement and verify the agreed work.
 - `codebase-design` and `improve-codebase-architecture` guide module design

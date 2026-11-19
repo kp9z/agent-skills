@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "kflows",
   "type": "skill-bundle",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "skills": [
     {
       "name": "to_ticket_yolo",
@@ -32,6 +32,16 @@
         "version": "1.3.2",
         "commit": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
         "path": "skills/productivity/grill-me"
+      }
+    },
+    {
+      "name": "grill-with-docs",
+      "path": "skills/grill-with-docs",
+      "source": {
+        "repository": "https://github.com/mattpocock/skills",
+        "version": "1.3.2",
+        "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
+        "path": "skills/engineering/grill-with-docs"
       }
     },
     {

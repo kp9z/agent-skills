@@ -28,6 +28,8 @@ it with upstream files would discard the kFlows setup and triage customizations.
 4. Preserve explicit invocation policies. `to_ticket_yolo` uses the included
    `to-spec` and `to-tickets` skills and intentionally skips their approval pauses
    when explicitly invoked. `grill-me-in-batch` uses the included `grilling` skill.
+   `grill-with-docs` uses the included `grilling` and `domain-modeling` skills
+   and runs only when explicitly invoked.
 5. `ticket_marathon` requires the included `implement`, testing and review skills,
    GitHub tracker configuration, and Codex chat tools (plus scheduling tools in
    scheduled mode). It runs sequential
