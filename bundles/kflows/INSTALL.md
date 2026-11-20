@@ -30,12 +30,10 @@ it with upstream files would discard the kFlows setup and triage customizations.
    when explicitly invoked. `grill-me-in-batch` uses the included `grilling` skill.
    `grill-with-docs` uses the included `grilling` and `domain-modeling` skills
    and runs only when explicitly invoked.
-5. `ticket_marathon` requires the included `implement`, testing and review skills,
-   GitHub tracker configuration, and Codex chat tools (plus scheduling tools in
-   scheduled mode). It runs sequential
-   batches of up to three tickets with scheduled continuation after 4 hours 30 minutes
-   or immediate continuation when the user requests continuous mode.
-   In scheduled mode, report unavailable scheduling rather than claiming unattended continuation.
+5. `ticket_marathon` requires the included `implement`, testing and review
+   skills, GitHub tracker configuration, and Codex chat tools. It runs eligible
+   tickets in parallel with isolated worktrees and resources, verifies merges
+   one at a time, and continues in the invoking chat.
 6. Copy all `harness_improver` scripts, references, and helper tests. Its helpers
    need Python 3; GitHub CLI operations also need authenticated `gh`. Run its
    offline checks with `python3 -m unittest discover -s <skill-directory>/tests`.

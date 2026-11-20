@@ -85,16 +85,14 @@ configuration, label mapping, and domain rules. The iOS bundle stays project-loc
   tracker configuration, and runs only when explicitly invoked as
   `$to_ticket_yolo` or `/to_ticket_yolo`.
 
-- `ticket_marathon` keeps the main chat as an orchestrator: it checks dependencies,
-  delegates each ticket to a new chat running the included `implement`, and waits for its
-  result or promptly defers blocked work before selecting an independent ticket.
-  Deferred workers retain their partial work and approvals; independent work uses
-  isolated checkouts and Simulator resources, with verified integration before dependents. It processes up to three tickets per batch,
-  then schedules continuation after 4 hours 30 minutes by default, or continues
-  immediately without automations when continuous mode is requested, until the queue is empty or
-  intervention is required. It requires project tracker configuration and Codex app
-  chat tools, plus scheduling tools in scheduled mode, and starts only through explicit
-  `$ticket_marathon` or `/ticket_marathon` invocation.
+- `ticket_marathon` runs dependency-ready tickets in parallel from one Codex
+  orchestrator chat. It starts with tickets likely to overlap least, assigns
+  each worker an isolated worktree and exclusive runtime resources, and
+  integrates verified results one at a time. When a merge conflicts, the
+  original ticket chat resolves it with both tickets’ requirements and checks.
+  The marathon continues in the current chat while eligible work can progress.
+  It requires project tracker configuration and Codex app chat tools and runs
+  only through explicit `$ticket_marathon` or `/ticket_marathon` invocation.
 
 - `harness_improver` investigates the current chat and related workers for recurring
   workflow blockers, then proposes reusable harness fixes with evidence and quality

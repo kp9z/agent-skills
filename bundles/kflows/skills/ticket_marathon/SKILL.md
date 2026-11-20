@@ -1,149 +1,142 @@
 ---
 name: ticket_marathon
-description: Orchestrate dependency-ready tickets in separate chats, sequentially in batches of three, with scheduled or user-requested continuous execution.
+description: Run dependency-ready tickets in parallel Codex chats with isolated worktrees and verified integration.
 disable-model-invocation: true
 ---
 
 # Ticket marathon
 
-The main chat is an **orchestrator only**: inspect open tickets, resolve dependencies, plan the order, delegate, wait, verify returned results, and manage the selected continuation mode. Tickets are already prepared for autonomous implementation. Never implement a ticket in the main chat, including when delegation fails.
-
-Explicit invocation authorizes creating a new Codex chat for each selected ticket to execute the installed `implement` skill, and, in scheduled mode, scheduling continuations of this same marathon. This authorization carries into scheduled continuations; it does not enable implicit invocation for unrelated requests. Read worker results through the chat tools; workers return their results in their own final response.
-
-## Choose the continuation mode
-
-Default to **scheduled mode**: run a batch of up to three tickets, then resume
-4 hours 30 minutes after batch completion.
-
-A user request such as "don't schedule anymore, run until finish" selects
-**continuous mode**. Record the selected mode with the queue state. Continue
-sequentially into the next batch immediately while eligible work remains;
-create no automation. On a switch from scheduled to continuous, disable only
-this marathon's known pending continuation and verify the result before continuing.
-If it cannot be disabled, report the blocker to avoid duplicate orchestrators.
-Preserve orchestration-only execution, separate per-ticket chats, dependency
-refreshes, result verification, and one newly dispatched implementation at a time in both modes. A blocked worker
-remains outstanding; follow **Blocked workers and isolation** before dispatching
-independent work that could overlap its resumption.
+The main chat is an **orchestrator only**. It owns queue selection, dispatch,
+waiting, and integration. Each ticket has one worker chat that runs the
+installed `implement` skill and owns implementation, fixes, checks, review,
+commits, and tracker completion. Explicit invocation authorizes creating those
+chats and sending their assignment, ownership, and integration follow-ups.
+Run continuously in the current chat without a schedule.
 
 ## Establish the queue
 
-1. Read the target project's `AGENTS.md`, configured tracker conventions, and triage mapping. Use that project's configured issue repository as the source of ticket status, not this skill collection. Verify that `implement` and its required testing and review skills are installed. If dependencies or tracker configuration are missing, report what is needed before starting.
-2. Honor an explicitly supplied ticket list, parent spec, or filter. Otherwise use all open implementation tickets labeled `ready-for-agent`. Fetch every results page. Exclude parent specs, tracking-only issues, and tickets marked `needs-triage`, `needs-info`, `ready-for-human`, or `wontfix`. Preserve this scope across continuations; new tickets qualify only if they match the original scope. Dependencies outside that scope are constraints, not permission to expand it.
-3. Record the repository path, current branch, queue scope, continuation mode, and any existing marathon continuation ID in the chat. Inspect working-tree changes and preserve unrelated work. Resume on the recorded branch; if it has changed unexpectedly or another marathon run is active for this checkout, stop for reconciliation before dispatching work. Preserve each dispatched ticket's worker chat ID, host ID, wait cursor, current phase, checkout, branch, pending action, and reserved shared resources across continuations so an existing worker is monitored rather than duplicated.
+1. Read the project’s `AGENTS.md`, tracker conventions, and triage mapping.
+   Verify that `implement` and its required testing and review skills are
+   installed. Use the project’s configured tracker.
+2. Honor the user’s ticket list, parent spec, or filter. Otherwise fetch all
+   pages of open implementation tickets labeled `ready-for-agent`. Exclude
+   parent specs, tracking-only issues, and tickets marked `needs-triage`,
+   `needs-info`, `ready-for-human`, or `wontfix`. Preserve this scope across
+   resumes. Dependencies outside scope constrain eligibility.
+3. Record the repository, scope, stable integration worktree and branch, and
+   latest verified integration commit. Keep the integration worktree exclusive
+   and preserve unrelated changes. On resume, reconcile unexpected branch
+   changes or an existing orchestrator before dispatching. Keep each worker’s
+   chat and host IDs, cursor, base commit, checkout, branch, phase, pending
+   action, and reserved resources so it can be resumed in place.
 
-## Ownership contract
+## Select and dispatch
 
-Before dispatch or existing-worker resumption, read and execute the installed
-[ownership integration](references/ownership.md). Prepare ownership before chat
-creation, attach the returned chat identity before worker operations, and resume
-through that boundary using the current cursor and authorization reference. Carry
-the shared registry and ownership credentials into worker prompts/continuations.
-Deferral retains claims; shared-resource handoff requires explicit current-owner
-release. Stop affected operations on disagreement and follow reviewed recovery.
+Fill available worker slots as tickets become ready. Start with two concurrent
+runners when resources permit. Honor a user-specified limit and account for
+available worktrees, wait-tool capacity, and exclusive runtime resources.
 
-## Run one batch
-
-Dispatch at most **three distinct tickets per batch**, strictly one at a time. Select the next ticket after the current worker completes or is safely deferred under **Blocked workers and isolation** below.
-
-For each slot:
-
-1. Refresh the queue. Read a candidate's full body and comments and resolve its native GitHub `blocked_by` dependencies plus explicit `Blocked by:` links. Fetch the blockers' current states, including blockers in other repositories. A ticket is eligible only when every blocker is confirmed complete; a closed-as-not-planned issue is not evidence of completion. Treat unreadable, ambiguous, or cyclic dependencies as blocked. Never start a dependent based on an uncommitted change or an expectation that its blocker will finish later.
-2. Choose an eligible ticket in dependency order, breaking ties by ascending issue number. If none is eligible, end the batch and apply the continuation rules below.
-3. State the issue number and title, then discover the Codex app's `list_projects`, `create_thread`, and `wait_threads` tools. Select the matching project and create a **new chat for only that ticket**, using the recorded checkout and branch, or an isolated checkout selected under **Blocked workers and isolation**. Begin `create_thread.prompt` with a direct skill invocation, `[$implement](<absolute path to the installed implement/SKILL.md>)`, followed by the issue URL. Resolve the installed skill path from available project or user-level skills; keep the worker’s working directory set to its assigned checkout. The worker must invoke that skill as its implementation workflow; if no Skill tool is available, read and execute the linked skill directly. Pass the repository path, branch, relevant dependency evidence, and any unrelated working-tree changes. Include the **Worker testing authorization** below verbatim in every dispatch prompt. Preserve the skill's testing and review requirements, complete tracker updates with a concise completion explanation and commit reference, and confirm closure. The worker must return the invoked skill path, acceptance-criteria results, checks, review outcome, commit references, issue status, and any unfinished phase or blocker. Keep scheduling and queue selection in the orchestrator. Do not pass the whole queue or deliberately dispatch tickets in parallel; account for a deferred worker’s possible resumption using the isolation rules. If chat creation is unavailable or fails, report the blocker and stop scheduling; do not fall back to implementation in the main chat.
-4. Count the ticket against the three-ticket limit when its worker is dispatched, including if it is later deferred. Record the returned chat and host IDs and follow **Wait for the worker** below. A successful dispatch or a progress update is not completion. If it needs user action, follow **Blocked workers and isolation**; for other ticket-specific blockers or failures, preserve the exact unfinished step and follow the same deferral and isolation rules. Stop dispatching only when a blocker prevents all remaining eligible work. Retain the worker identity and phase rather than creating a replacement or taking over its work.
-5. For a worker reporting completion, verify its evidence against live issue status and its assigned branch's commits, then follow **Integration** below. Confirm the required checks and review succeeded and the issue is closed as completed before using it to unblock another ticket. If evidence is missing or inconsistent, preserve the unfinished verification as a ticket-specific blocker and continue independent eligible work under the isolation rules. Deferred workers remain unfinished and cannot unblock dependents. The orchestrator summarizes the result; the worker owns implementation, fixes, commits, and tracker completion.
+1. Refresh the queue before filling a slot. Read each candidate’s full issue
+   and comments. Resolve native GitHub `blocked_by` dependencies and explicit
+   `Blocked by:` links, including across repositories. Require completed
+   blockers and verified integration of the changes the candidate needs.
+   An ambiguous, cyclic, unreadable, or closed-as-not-planned blocker leaves
+   the ticket ineligible.
+2. Prefer candidates likely to conflict least with active tickets and completed
+   work awaiting integration. Use the acceptance criteria, a quick source
+   search, and known changed paths to predict the production files, shared
+   contracts, tests, and generated indexes both sides may edit. Compare
+   behavior as well as filenames. Separate modules and test seams are good
+   parallel candidates. Edits to the same lifecycle or contract deserve closer
+   sequencing than a shared index entry. Honor dependencies and explicit user
+   priorities first. Break otherwise equal choices by ascending ticket number.
+   When only higher-overlap tickets remain, sequence tightly coupled changes
+   against the newest verified base and keep progressing through the queue.
+3. Give **every worker its own worktree and branch** based on the latest
+   verified integration commit. Assign separate build and evidence paths and
+   exclusive Simulator, device, or backend resources as needed. Phases that
+   need the same exclusive resource can proceed in turn after ownership handoff.
+   Carry forward authorized **Device Hub** use. Use the
+   [ownership contract](references/ownership.md) to prepare the complete resource
+   group before chat creation, attach the actual chat, and confirm ownership
+   before worker file or device operations.
+4. State the issue and title. Discover `list_projects`, `create_thread`, and
+   `wait_threads`, select the matching project, and create a chat for that
+   ticket only. Begin its prompt with
+   `[$implement](<absolute path to the installed implement/SKILL.md>)` and
+   the issue URL. Include the assigned worktree, branch, exact base, dependency
+   evidence, resources, and the **Worker testing authorization** verbatim.
+   If a skill tool is unavailable, have the worker read the installed skill
+   directly. Require a completion comment with the verified commit and a
+   readback of issue closure. Ask the worker to return the skill path,
+   acceptance results, test and review receipts, exact commit, closure state,
+   and any unfinished phase. Record its identity and attachment. If dispatch
+   or attachment fails, reconcile the existing attempt through the ownership
+   contract.
 
 ## Worker testing authorization
 
-Include this instruction in every worker prompt, carrying forward the user's authorization for autonomous implementation of prepared tickets:
+Include this instruction in every worker prompt.
 
 > The ticket's acceptance criteria and testing requirements establish the agreed testing scope. Treat the public testing boundaries (seams) specified there as pre-agreed for `implement` and `tdd`. State the seams you will use, then proceed with routine tests within that scope without requesting another confirmation. Choose ordinary test cases and implementation details autonomously, following project conventions. Preserve TDD, required checks and independent review. Ask only when a material testing-scope decision remains unresolved by the ticket, project instructions or existing user authorization, or when an actual environment permission is required; explain the exact missing decision or permission.
 
-If an existing worker is waiting only to reconfirm testing already covered by this authorization, pass this instruction to that same worker when follow-up messaging is authorized. Preserve its identity, checkout and resource ownership, reconcile any other pending action, then resume sequential orchestration. Treat a genuinely unresolved scope decision or environment permission under **Blocked workers and isolation**.
+If an existing worker only needs confirmation already covered by this
+authorization, pass it to that same chat and resume through the ownership
+contract. Defer genuinely unresolved decisions or permissions.
 
-## Wait for the worker
+## Wait and handle blockers
 
-Use `wait_threads` as a completion wait, with one target for the current worker, except when monitoring resumable deferred workers as described below. Each target contains its `threadId`, `hostId`, and latest `afterCursor` when available.
+Use `wait_threads` as a bounded completion wait for active workers and
+resumable deferred workers. Pass each thread’s `threadId`, `hostId`, and latest
+`afterCursor`. Use the supported timeout within runtime limits. On a timeout,
+save each returned cursor and renew the wait. Use an immediate snapshot for a
+user status request or a targeted recovery check. Read a worker transcript only
+when a completion or attention result lacks information needed to act.
 
-- Use `timeoutMs: 120000`, the currently supported two-minute maximum, when runtime instructions permit. If a stricter runtime limit applies, use that shorter bound. A requested three-minute wait cannot be passed as `180000` to the current tool; use supported bounded waits instead. Completion or required attention can return early; worker commentary does not wake the wait. Reserve `timeoutMs: 0` for a user-requested immediate status check, a single recovery snapshot after an interrupted wait, or a targeted recheck after a deferred worker’s required action is resolved.
-- On a timeout with the worker still running, save the returned cursor and renew the same bounded wait directly. Retain only compact worker state; unchanged progress needs no analysis or narration. A timeout alone is not a failure or a reason to dispatch another worker.
-- Use the wait result as the status source while work runs. Do not interleave `read_thread`, `list_threads`, issue refreshes, Git checks, or messages asking the worker for progress. Read the worker transcript only when a completion or attention result lacks evidence needed for verification or intervention.
-- Stay silent on unchanged status. Report meaningful completion, failures, or required user action. If higher-priority runtime instructions require an update, keep it brief and use the latest wait result without an extra status fetch.
-- Bounded waits still require renewal; do not assume ending the orchestrator turn will automatically resume it when a separate chat finishes. If waiting is unavailable or errors persist, preserve the worker identity and report the monitoring blocker. Use the existing continuation rules rather than creating a separate polling automation or claiming completion.
+On completion, verify the worker’s evidence and integrate or record the
+unfinished verification. On a blocker, report the exact action and link its
+chat. Defer it promptly with its identity, cursor, pending action, partial work,
+and claims. A deferred worker can resume at any time. Keep its worktree and
+resources reserved until explicit release. Continue with independent tickets
+whose claims do not overlap. Return to the same worker when the block clears.
 
-## Blocked workers and isolation
+Refill free slots after completion or deferral. Report meaningful progress and
+required user action. If waiting or dispatch remains unavailable, preserve
+worker identities and report which work cannot proceed.
 
-When a worker reports a ticket-specific blocker, including pending user input or
-approval, report the exact action and link its chat once. Immediately record it
-as deferred and refresh dependencies to find another independent eligible ticket;
-continue without a fixed grace period. A ticket-specific blocker
-alone does not end the marathon. Preserve the worker's chat and host IDs, cursor,
-unfinished phase, pending approval, checkout, branch, partial work, and resource
-ownership. Keep its ticket unfinished and its dependents blocked. Reuse that
-worker after resolution instead of dispatching a replacement.
+## Integrate verified results
 
-Before dispatching independent work:
+One orchestrator integrates one result at a time. Before integration, verify
+the live issue is closed as completed, the worker branch contains the exact
+clean commit, and required tests and reviews passed. Keep incomplete results
+from unblocking dependents.
 
-- Treat an approval-blocked worker as able to resume at any time. Reserve its
-  checkout even if currently clean. Leave its files, Git operations, and pending
-  approval intact; do not stash, discard, commit, reset, or finish its partial work
-  to free the checkout. An attention state is not proof that it cannot resume.
-- Use a separate checkout/worktree and branch for independent work when existing
-  authorization and environment permissions allow it. Base it on the last verified
-  integration commit, excluding the blocked ticket's partial work. Record the new
-  worker's assigned path and branch. If isolation cannot be established, report
-  the specific permission, tool, or resource blocker rather than changing the
-  reserved checkout or claiming no independent ticket exists.
-- Isolate shared runtime resources as well as files: assign a distinct Simulator
-  and build/output paths where needed. Record device ownership and pass it to the
-  worker. Never run simultaneous commands against the same checkout or Simulator,
-  including commands from a resumed worker. If the project requires a specific
-  shared device, reserve it for its existing owner; independent work may proceed
-  only through phases that do not use it until handoff is confirmed.
-- Carry forward explicit user authorization for routine Device Hub use within the
-  requested testing/debugging scope. Name **Device Hub** accurately in worker
-  instructions. A skill cannot grant persistent app/OS permissions or bypass an
-  approval prompt; preserve a blocked worker's pending prompt, report the exact
-  requested approval, and continue eligible work with isolated resources.
+1. Preview the merge of the exact ticket commit against the current verified
+   integration tip without changing either branch or checkout. Fast-forward
+   when the worker’s verified commit contains that tip. For a clean divergent
+   merge, inspect automatically combined code where the two changes interact,
+   confirm the merged tree matches the preview, and run the project’s required
+   checks for the combined result.
+2. If the preview conflicts, preserve both commits. With ownership released
+   and reassigned, return the conflict to the ticket’s **original chat** on a
+   fresh integration worktree and branch based on the exact integration tip.
+   Have that worker merge the exact ticket commit there. Leave the orchestrator’s
+   integration worktree clean. Follow the
+   [merge handoff](references/merge-handoff.md) for the context and evidence.
+3. Land the verified result only when it still matches the current integration
+   tip. Keep the tip stable during an active conflict resolution where
+   practical while independent implementations continue. If the tip advances,
+   preview again and verify any new overlap before landing. Confirm the
+   required commits and checks on the resulting integration revision before
+   dispatching dependents. Keep partial or unintegrated worktrees until the work
+   is preserved and their claims are explicitly released.
 
-Keep unresolved deferred tickets out of selection even if their labels change;
-they remain outstanding work. When their required action resolves, reconcile the
-existing worker and resource ownership before resuming shared phases. Use its
-saved identity and cursor, and include outstanding workers in bounded completion
-waits when the tool supports multiple targets. Apply the same timeout and silence
-rules as **Wait for the worker**. Avoid polling unchanged attention states.
+## Finish or resume
 
-## Integration
-
-A worker owns its implementation, fixes, checks, review, commits, and tracker
-completion. Record a stable integration checkout/branch separately from each
-worker checkout. Verify each returned commit and required evidence before
-integration. Apply verified commits to the integration branch only when that
-checkout is clean and exclusively available, using the authorized local Git
-workflow. Never integrate into an approval-blocked worker's reserved checkout.
-If no integration checkout is available, use an authorized separate one or report
-the specific integration blocker; preserve completed commits for later.
-
-Confirm the commits are present on the integration branch, resolve any conflicts
-through the owning worker or a separately authorized integration task, and run
-checks warranted by the integrated result. Only then may dependent tickets start,
-based on that verified integration commit. A closed issue or a commit on an
-unintegrated isolated branch alone cannot unblock them. Retain worktrees with
-partial work, pending approvals, or unintegrated commits; clean them up only after
-ownership is released and all work is preserved.
-
-## Continue or finish
-
-Refresh the scoped queue after each batch, including batches with fewer than three tickets.
-
-- **Empty queue, with no deferred unfinished tickets:** report completion and disable this marathon's pending continuation, if any. Stop scheduling.
-- **Eligible tickets remain, continuous mode:** begin the next batch immediately after refreshing dependencies and verifying the previous results. Do not create an automation or end the run merely because three tickets completed.
-- **Tickets remain, scheduled mode:** schedule the next batch **4 hours 30 minutes (270 minutes) after this batch finishes**. A partial batch does not justify starting another immediately. This also applies when tickets are temporarily waiting on external dependencies.
-- **User action is required:** defer ticket-specific blockers immediately under **Blocked workers and isolation** and proceed with independent eligible tickets. In continuous mode, continue immediately while independent eligible work remains; in scheduled mode, schedule further batches. If only user-action-blocked tickets and their dependents remain, or the blocker affects the whole marathon (such as unavailable tracker access or an inability to isolate required resources), report the blockers and stop scheduling until resolved. In continuous mode, if only externally blocked dependencies remain, report them and stop without scheduling or repeatedly refreshing an unchanged queue. In scheduled mode, if a dependency-only wait is unchanged across three consecutive runs, report the blocking issues and stop scheduling until the user resumes. Distinguish this blocked state from an empty queue.
-
-In scheduled mode only, use the Codex app's `automation_update` tool, discovering its current schema before scheduling. Create or update a heartbeat attached to the current chat. Keep exactly one pending continuation for this marathon, reuse its ID, and set its next wakeup relative to batch completion. Prefer a one-shot wakeup when supported; otherwise use a 270-minute interval and re-anchor it after every batch. Verify the saved schedule and record the ID and next run time. If the tool cannot express or save the delay, report that scheduling is blocked rather than claiming a continuation exists or substituting a different cadence.
-
-The saved prompt must explicitly invoke `$ticket_marathon` at its installed path and include the repository path, recorded branch, original queue scope, scheduled mode, continuation ID when known, all unfinished tickets and phases with their worker chat IDs, host IDs, and wait cursors, each deferred action and pending approval, worker checkout/branch, shared resource ownership, and the verified integration branch/commit, and the consecutive unchanged dependency-wait count. Direct it to remain an orchestrator only, run one batch by delegating each new ticket to a new chat and waiting for its result using **Wait for the worker**, apply **Blocked workers and isolation**, refresh live issue state, preserve sequential dependency checks, and apply **Continue or finish** when the batch ends. Monitor existing unfinished workers instead of dispatching those tickets again; skip unresolved deferred workers while independent tickets can proceed. Stay quiet on unchanged dependency waits; report completed work, failures, required user action, and final completion.
-
-End each productive run with completed ticket links, worker chat links, and commit references, remaining or blocked tickets, and either the verified next run time in scheduled mode or the completion/blocker outcome in continuous mode. Workers commit locally; pushing or opening pull requests requires separate authorization.
+Refresh eligibility after each completion, integration, or deferral. While
+runners are active, keep waiting. While eligible work can progress, keep
+dispatching. When neither condition holds, report whether the scoped queue is
+complete or blocked. Include completed issue links, worker chat links, commit
+references, and the exact outstanding blocker or unfinished phase. Resume
+through the recorded workers after the user resolves a blocker. Workers commit
+locally. Pushing or opening pull requests requires separate authorization.
