@@ -1,6 +1,6 @@
 interface:
   display_name: "Ticket Marathon"
   short_description: "Run and integrate independent tickets in parallel"
-  default_prompt: "Use $ticket_marathon to run dependency-ready tickets in isolated worktrees, start with the least overlap, and verify each merge as the queue progresses."
+  default_prompt: "Use $ticket_marathon to run independent tickets in parallel, run tickets with foreseeable conflicts one at a time, and verify each merge."
 policy:
   allow_implicit_invocation: false

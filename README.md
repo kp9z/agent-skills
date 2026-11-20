@@ -86,9 +86,9 @@ configuration, label mapping, and domain rules. The iOS bundle stays project-loc
   `$to_ticket_yolo` or `/to_ticket_yolo`.
 
 - `ticket_marathon` runs dependency-ready tickets in parallel from one Codex
-  orchestrator chat. It starts with tickets likely to overlap least, assigns
-  each worker an isolated worktree and exclusive runtime resources, and
-  integrates verified results one at a time. When a merge conflicts, the
+  orchestrator chat. It runs tickets with foreseeable conflicts one at a time.
+  Each worker gets an isolated worktree and exclusive runtime resources. The
+  orchestrator integrates verified results one at a time. When a merge conflicts, the
   original ticket chat resolves it with both tickets’ requirements and checks.
   The marathon continues in the current chat while eligible work can progress.
   It requires project tracker configuration and Codex app chat tools and runs

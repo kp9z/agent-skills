@@ -42,16 +42,16 @@ available worktrees, wait-tool capacity, and exclusive runtime resources.
    blockers and verified integration of the changes the candidate needs.
    An ambiguous, cyclic, unreadable, or closed-as-not-planned blocker leaves
    the ticket ineligible.
-2. Prefer candidates likely to conflict least with active tickets and completed
-   work awaiting integration. Use the acceptance criteria, a quick source
-   search, and known changed paths to predict the production files, shared
-   contracts, tests, and generated indexes both sides may edit. Compare
-   behavior as well as filenames. Separate modules and test seams are good
-   parallel candidates. Edits to the same lifecycle or contract deserve closer
-   sequencing than a shared index entry. Honor dependencies and explicit user
-   priorities first. Break otherwise equal choices by ascending ticket number.
-   When only higher-overlap tickets remain, sequence tightly coupled changes
-   against the newest verified base and keep progressing through the queue.
+2. Screen candidates for foreseeable merge conflicts with active workers,
+   deferred workers that may resume, and completed work awaiting integration.
+   Use acceptance criteria, a quick source search, and known changed paths to
+   check for competing edits or interacting behavior in production code, shared
+   contracts, tests, and generated files.
+   **When you foresee a conflict, run those tickets one at a time.** Wait for
+   the earlier change to land, then reassess and start the next ticket from the
+   latest verified integration commit. Fill other slots with independent
+   tickets. Among those, prefer the least overlap and break ties by ascending
+   ticket number after honoring dependencies and explicit user priorities.
 3. Give **every worker its own worktree and branch** based on the latest
    verified integration commit. Assign separate build and evidence paths and
    exclusive Simulator, device, or backend resources as needed. Phases that

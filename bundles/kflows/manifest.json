@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "kflows",
   "type": "skill-bundle",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "skills": [
     {
       "name": "to_ticket_yolo",
