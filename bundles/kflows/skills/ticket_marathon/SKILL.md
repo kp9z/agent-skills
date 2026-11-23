@@ -135,8 +135,17 @@ from unblocking dependents.
 
 Refresh eligibility after each completion, integration, or deferral. While
 runners are active, keep waiting. While eligible work can progress, keep
-dispatching. When neither condition holds, report whether the scoped queue is
-complete or blocked. Include completed issue links, worker chat links, commit
-references, and the exact outstanding blocker or unfinished phase. Resume
-through the recorded workers after the user resolves a blocker. Workers commit
-locally. Pushing or opening pull requests requires separate authorization.
+dispatching.
+
+Before finishing, fetch all pages of the live queue again using the original
+scope and filters. Include newly created tickets and tickets that have become
+eligible during the run. Apply the same dependency and conflict checks, dispatch
+any eligible work, and repeat this final recheck after that work is handled.
+Finish only when a full refresh confirms no eligible work remains and no
+runners are active.
+
+Report whether the scoped queue is complete or blocked. Include completed issue
+links, worker chat links, commit references, and the exact outstanding blocker
+or unfinished phase. Resume through the recorded workers after the user resolves
+a blocker. Workers commit locally. Pushing or opening pull requests requires
+separate authorization.

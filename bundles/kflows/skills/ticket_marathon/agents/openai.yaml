@@ -1,6 +1,6 @@
 interface:
   display_name: "Ticket Marathon"
   short_description: "Run and integrate independent tickets in parallel"
-  default_prompt: "Use $ticket_marathon to run independent tickets in parallel, run tickets with foreseeable conflicts one at a time, and verify each merge."
+  default_prompt: "Use $ticket_marathon to run independent tickets in parallel, run tickets with foreseeable conflicts one at a time, verify each merge, and recheck the live queue for newly eligible tickets before finishing."
 policy:
   allow_implicit_invocation: false
