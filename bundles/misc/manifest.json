@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "name": "misc",
+  "type": "skill-bundle",
+  "version": "1.0.0",
+  "skills": [
+    {
+      "name": "free_space",
+      "path": "skills/free_space"
+    }
+  ]
+}

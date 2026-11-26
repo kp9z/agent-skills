@@ -14,6 +14,7 @@ performing the installation.
 | `build-ios-apps` | Nine OpenAI iOS skills, testing, design review, and TestFlight upload | [`bundles/build-ios-apps/INSTALL.md`](bundles/build-ios-apps/INSTALL.md) |
 | `kflows` | GitHub setup, triage, planning, implementation, review, and personal workflows | [`bundles/kflows/INSTALL.md`](bundles/kflows/INSTALL.md) |
 | `destructive-command-hooks` | A shared destructive-command blocker with Codex and Claude Code adapters | [`bundles/destructive-command-hooks/INSTALL.md`](bundles/destructive-command-hooks/INSTALL.md) |
+| `misc` | Local utilities for macOS disk cleanup | [`bundles/misc/INSTALL.md`](bundles/misc/INSTALL.md) |
 
 ## How bundles work
 
@@ -112,6 +113,12 @@ configuration, label mapping, and domain rules. The iOS bundle stays project-loc
 The underscore spellings of `to_ticket_yolo`, `ticket_marathon`,
 `harness_improver`, and `sync_skills` preserve their requested invocation names.
 
+### Misc
+
+Use `/free_space` to clear idle build and download caches on macOS, or
+`/free_space preview` to estimate reclaimable space. The skill preserves
+simulator data and test results.
+
 ### Destructive-command hooks
 
 The hook bundle stores one shared Python implementation plus separate merge
@@ -132,6 +139,10 @@ bundles/
 │   ├── assets/
 │   └── skills/
 ├── kflows/
+│   ├── INSTALL.md
+│   ├── manifest.json
+│   └── skills/
+├── misc/
 │   ├── INSTALL.md
 │   ├── manifest.json
 │   └── skills/
