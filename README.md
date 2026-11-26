@@ -94,6 +94,7 @@ configuration, label mapping, and domain rules. The iOS bundle stays project-loc
   original ticket chat resolves it with both tickets’ requirements and checks.
   The marathon rechecks the full live queue before finishing and continues in
   the current chat when newly eligible tickets appear within the selected scope.
+  In Claude Code it pauses near plan usage limits and resumes after the reset.
   It requires project tracker configuration and either Codex app chat tools or
   Claude Code desktop sessions (see its `references/claude-code.md`), and runs
   only through explicit `$ticket_marathon` or `/ticket_marathon` invocation.

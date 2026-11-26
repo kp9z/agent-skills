@@ -50,6 +50,40 @@ Use this mapping when the orchestrator runs in the Claude Code desktop app
 - A worker that is waiting for the user's answer is not complete. Report it
   with its session link (`[title](#local_…)`) and defer it as SKILL.md describes.
 
+## Quota pause and resume
+
+Plan limits reset every five hours, and extra usage may bill past the limit,
+so pause on purpose instead of running into it.
+
+1. **Check after each ticket.** After every worker report, and before filling
+   any slot, call `mcp__ccd_session_mgmt__get_usage`. Read the `5-hour limit`
+   and `Weekly` windows in `plan.windows`. A user-given threshold wins;
+   otherwise pause when any window is at **80% used or more** (20% left).
+   If `plan.status` is not `ok`, keep running and say usage is unknown.
+2. **Pause.** Dispatch nothing new. Let running workers finish their current
+   ticket, then integrate their verified results as usual. Then write the
+   state file `<git common dir>/ticket-marathon/state.json` with the scope and
+   filters, integration worktree, branch and verified commit, ownership
+   registry path, and for each worker its id, dispatch id, checkout, branch,
+   phase, pending action and cursor.
+3. **Schedule the wake-up.** Take `resetsAt` of the window that triggered the
+   pause and create a one-time task with
+   `mcp__scheduled-tasks__create_scheduled_task`: `fireAt` five minutes after
+   that time, `notifyOnCompletion: true` and a prompt that only replies
+   `ticket_marathon quota reset`. Its completion notification resumes this
+   orchestrator session. Then end the turn, reporting the pause, the state
+   file, completed tickets and the wake-up time in the user's local time.
+   The task runs only while the desktop app is open; otherwise at next launch.
+4. **Resume.** When woken, call `get_usage` again. If the window has not reset,
+   schedule another wake-up and stop. Otherwise read the state file, reconcile
+   it with the registry, branches and issues as on any resume, and continue.
+   A turn started by the wake-up cannot start new sessions, so run new
+   tickets as background subagents (`Agent` with `run_in_background: true`)
+   working in their pre-created worktrees, with the same worker prompt. Use
+   `worker: {chatId: "subagent:<agent id>", hostId: "local"}` for ownership.
+   Existing worker sessions still get follow-ups through `SendMessage`. When
+   the user replies in the orchestrator session, go back to worker sessions.
+
 ## Finishing
 
 Workers commit locally on `ticket/<n>`. Never push those branches or open pull

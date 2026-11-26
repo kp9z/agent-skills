@@ -14,7 +14,7 @@ chats and sending their assignment, ownership, and integration follow-ups.
 Run continuously in the current chat without a schedule.
 
 The chat tool names below are Codex's. In the Claude Code desktop app, follow
-[the Claude Code mapping](references/claude-code.md) for dispatch, waiting and
+[the Claude Code mapping](references/claude-code.md) for dispatch, waiting, quota pauses and
 follow-ups.
 
 ## Establish the queue
