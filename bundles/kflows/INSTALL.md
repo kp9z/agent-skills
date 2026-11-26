@@ -31,8 +31,9 @@ it with upstream files would discard the kFlows setup and triage customizations.
    `grill-with-docs` uses the included `grilling` and `domain-modeling` skills
    and runs only when explicitly invoked.
 5. `ticket_marathon` requires the included `implement`, testing and review
-   skills, GitHub tracker configuration, and Codex chat tools. It runs independent
-   tickets in parallel with isolated worktrees and resources. Tickets with
+   skills, GitHub tracker configuration, and Codex chat tools or Claude Code
+   desktop sessions (its `references/claude-code.md` maps the tools). It runs
+   independent tickets in parallel with isolated worktrees and resources. Tickets with
    foreseeable conflicts run one at a time. The marathon verifies merges and
    continues in the invoking chat.
 6. Copy all `harness_improver` scripts, references, and helper tests. Its helpers

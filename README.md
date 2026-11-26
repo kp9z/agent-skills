@@ -86,14 +86,16 @@ configuration, label mapping, and domain rules. The iOS bundle stays project-loc
   tracker configuration, and runs only when explicitly invoked as
   `$to_ticket_yolo` or `/to_ticket_yolo`.
 
-- `ticket_marathon` runs dependency-ready tickets in parallel from one Codex
-  orchestrator chat. It runs tickets with foreseeable conflicts one at a time.
+- `ticket_marathon` runs dependency-ready tickets in parallel from one
+  orchestrator chat in Codex or the Claude Code desktop app. It runs tickets
+  with foreseeable conflicts one at a time.
   Each worker gets an isolated worktree and exclusive runtime resources. The
   orchestrator integrates verified results one at a time. When a merge conflicts, the
   original ticket chat resolves it with both tickets’ requirements and checks.
   The marathon rechecks the full live queue before finishing and continues in
   the current chat when newly eligible tickets appear within the selected scope.
-  It requires project tracker configuration and Codex app chat tools and runs
+  It requires project tracker configuration and either Codex app chat tools or
+  Claude Code desktop sessions (see its `references/claude-code.md`), and runs
   only through explicit `$ticket_marathon` or `/ticket_marathon` invocation.
 
 - `harness_improver` investigates the current chat and related workers for recurring
