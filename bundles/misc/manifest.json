@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "misc",
   "type": "skill-bundle",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "skills": [
     {
       "name": "free_space",

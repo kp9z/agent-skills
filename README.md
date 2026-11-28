@@ -123,8 +123,9 @@ The underscore spellings of `to_ticket_yolo`, `ticket_marathon`,
 ### Misc
 
 Use `/free_space` to clear idle build and download caches on macOS, or
-`/free_space preview` to estimate reclaimable space. The skill preserves
-simulator data and test results.
+`/free_space preview` to estimate reclaimable space. Each run then lists larger
+cleanups (unavailable simulators, leftover temp checkouts, Docker data, device
+support, archives) and deletes one only after the user picks it.
 
 ### Destructive-command hooks
 

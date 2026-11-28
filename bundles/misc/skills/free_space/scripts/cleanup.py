@@ -1,5 +1,6 @@
 """Clear regenerable caches on the current user's Mac."""
 import argparse
+import json
 import os
 from pathlib import Path
 import plistlib
@@ -99,6 +100,68 @@ def eligible(path):
             and (path.is_dir() or path.is_file()))
 
 
+def du_bytes(paths):
+    paths = [str(p) for p in paths if p.exists()]
+    if not paths:
+        return 0
+    try:
+        rows = subprocess.run(["/usr/bin/du", "-sk", *paths], capture_output=True,
+                              text=True).stdout
+        return sum(int(r.split("\t", 1)[0]) for r in rows.splitlines()) * 1024
+    except (OSError, ValueError):
+        return 0
+
+
+def unavailable_simulators(home):
+    try:
+        out = subprocess.run(["/usr/bin/xcrun", "simctl", "list", "devices", "unavailable", "-j"],
+                             capture_output=True, text=True, timeout=60).stdout
+        devices = [d for group in json.loads(out).get("devices", {}).values() for d in group]
+    except (OSError, ValueError, subprocess.SubprocessError):
+        return []
+    root = home / "Library/Developer/CoreSimulator/Devices"
+    return [root / d["udid"] for d in devices if d.get("udid")]
+
+
+def survey(home, temp):
+    """Measure larger cleanup candidates that need explicit confirmation. Read-only."""
+    dev = home / "Library/Developer"
+    sims = unavailable_simulators(home)
+    yield ("Unavailable simulators", sims,
+           f"{len(sims)} devices whose runtime is gone; `xcrun simctl delete unavailable`")
+    tmp = [d for d in temp.iterdir()
+           if d.is_dir() and not d.is_symlink() and not d.name.startswith(("claude-", "com.apple"))
+           and d.stat().st_uid == os.getuid()]
+    big = sorted(((du_bytes([d]), d) for d in tmp), reverse=True)
+    big = [d for size, d in big if size >= 100 * 1024 ** 2]
+    yield ("Leftover /private/tmp folders", big,
+           "check nested Git checkouts are clean worktrees (or pushed) before deleting; "
+           + ", ".join(d.name for d in big[:8]) + (" ..." if len(big) > 8 else ""))
+    support = [p for p in dev.glob("Xcode/* DeviceSupport/*") if p.is_dir()]
+    yield ("Xcode device support", support,
+           ", ".join(p.name for p in support[:6]) + "; Xcode rebuilds it when a device reconnects")
+    yield ("Xcode archives", [dev / "Xcode/Archives"],
+           "needed only to symbolicate crashes from those builds")
+    yield ("Docker data", [home / "Library/Containers/com.docker.docker"],
+           "`docker system prune` with Docker running; never delete the folder directly")
+    updaters = [p for p in (home / "Library/Caches").glob("*")
+                if p.name.endswith(".ShipIt") or p.name in ("notion-updater", "electron")]
+    yield ("App updater caches", updaters, ", ".join(p.name for p in updaters))
+    yield ("Codex visualizations", [home / ".codex/visualizations"], "old Codex run output")
+
+
+def print_survey(home, temp):
+    rows = []
+    for label, paths, note in survey(home, temp):
+        size = du_bytes(paths)
+        if size >= 256 * 1024 ** 2:
+            rows.append((size, label, note))
+    if rows:
+        print("\nNeeds confirmation (not touched):")
+        for size, label, note in sorted(rows, reverse=True):
+            print(f"  {size / GIB:6.2f} GiB  {label}: {note}")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--apply", action="store_true", help="remove eligible idle caches")
@@ -135,6 +198,7 @@ def main():
             failed = True
     after = shutil.disk_usage(home).free
     print(f"Free: {after / GIB:.2f} GiB (change {(after - before) / GIB:+.2f} GiB)")
+    print_survey(home, Path("/private/tmp"))
     return int(failed)
 
 
