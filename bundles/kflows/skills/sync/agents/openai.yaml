@@ -1,0 +1,7 @@
+interface:
+  display_name: "Sync"
+  short_description: "Fast-forward local main to the latest remote main"
+  default_prompt: "Use $sync to pull the latest remote main into local main."
+
+policy:
+  allow_implicit_invocation: false

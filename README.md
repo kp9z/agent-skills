@@ -113,6 +113,10 @@ configuration, label mapping, and domain rules. The iOS bundle stays project-loc
   pushes the result, and keeps the chat open. It requires explicit invocation
   via `/merge-to-local-main` or `$merge-to-local-main`.
 
+- `sync` fast-forwards local `main` to the latest remote `main` without merging,
+  rebasing, or switching the current branch, and stops on divergence. It runs
+  only as `/sync` or `$sync`.
+
 The underscore spellings of `to_ticket_yolo`, `ticket_marathon`,
 `harness_improver`, and `sync_skills` preserve their requested invocation names.
 

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "kflows",
   "type": "skill-bundle",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "skills": [
     {
       "name": "to_ticket_yolo",
@@ -23,6 +23,10 @@
     {
       "name": "merge-to-local-main",
       "path": "skills/merge-to-local-main"
+    },
+    {
+      "name": "sync",
+      "path": "skills/sync"
     },
     {
       "name": "grill-me",
